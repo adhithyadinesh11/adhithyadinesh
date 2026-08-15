@@ -1,0 +1,490 @@
+/* ==========================================
+   CONTACT — MOBILE
+========================================== */
+
+@media screen and (max-width:700px){
+
+    /* ==========================================
+       PAGE
+    ========================================== */
+
+    .contact-page{
+
+        width:100%;
+
+        min-height:100dvh;
+
+        box-sizing:border-box;
+
+        padding:100px 9vw 70px !important;
+
+        text-align:center;
+
+    }
+
+/* ==========================================
+   MOBILE HEADER
+========================================== */
+
+/* CLOSED MENU — hamburger on top-left */
+
+.navbar:not(.mobile-open){
+
+    position:fixed !important;
+
+    top:22px !important;
+
+    left:22px !important;
+
+    right:auto !important;
+
+    width:42px !important;
+
+    height:42px !important;
+
+    margin:0 !important;
+
+    padding:0 !important;
+
+    transform:none !important;
+
+    z-index:10000 !important;
+
+}
+
+
+/* Keep hamburger in its normal position */
+
+.navbar:not(.mobile-open) .menu-toggle{
+
+    position:absolute !important;
+
+    top:0 !important;
+
+    left:0 !important;
+
+    transform:none !important;
+
+    margin:0 !important;
+
+}
+
+
+    /* ==========================================
+       CONTACT PAGE TITLE
+       Centered on the same line as hamburger
+    ========================================== */
+
+    .contact-title{
+
+        position:fixed !important;
+
+        top:28px !important;
+
+        left:50% !important;
+
+        transform:translateX(-50%) !important;
+
+        width:auto !important;
+
+        margin:0 !important;
+
+        padding:0 !important;
+
+        z-index:1001 !important;
+
+        font-family:"Syne",sans-serif !important;
+
+        font-size:2rem !important;
+
+        font-weight:700 !important;
+
+        line-height:32px !important;
+
+        letter-spacing:-.025em !important;
+
+        white-space:nowrap !important;
+
+        text-align:center !important;
+
+    }
+
+
+    /* ==========================================
+       MAIN CONTENT
+    ========================================== */
+
+    .contact-container{
+
+        display:flex !important;
+
+        flex-direction:column !important;
+
+        align-items:center !important;
+
+        width:100% !important;
+
+        max-width:520px;
+
+        margin:0 auto;
+
+        gap:55px !important;
+
+    }
+
+
+    /* ==========================================
+       SEND MESSAGE
+    ========================================== */
+
+    .contact-form{
+
+        order:1 !important;
+
+        display:flex !important;
+
+        flex-direction:column !important;
+
+        align-items:center !important;
+
+        width:100% !important;
+
+        gap:30px !important;
+
+        margin:0 !important;
+
+        padding:0 !important;
+
+    }
+
+
+    .contact-form::before{
+
+        content:"SEND MESSAGE";
+
+        display:block;
+
+        margin-bottom:8px;
+
+        font-family:"DM Mono",monospace;
+
+        font-size:.8rem;
+
+        letter-spacing:.25em;
+
+        color:rgba(255,255,255,.4);
+
+    }
+
+
+    /* ==========================================
+       INPUTS
+    ========================================== */
+
+    .contact-form input,
+    .contact-form textarea{
+
+        width:100% !important;
+
+        box-sizing:border-box;
+
+        padding:20px 0;
+
+        background:transparent;
+
+        border:none;
+
+        border-bottom:1px solid rgba(255,255,255,.22);
+
+        outline:none;
+
+        color:#fff;
+
+        font-family:"DM Mono",monospace;
+
+        font-size:.78rem;
+
+        text-align:center;
+
+    }
+
+
+    .contact-form input::placeholder,
+    .contact-form textarea::placeholder{
+
+        color:rgba(255,255,255,.4);
+
+        text-align:center;
+
+    }
+
+
+    .contact-form input:focus,
+    .contact-form textarea:focus{
+
+        border-bottom-color:rgba(255,255,255,.65);
+
+    }
+
+
+    .contact-form textarea{
+
+        min-height:100px;
+
+        resize:none;
+
+    }
+
+
+    /* ==========================================
+       SEND BUTTON
+    ========================================== */
+
+    .contact-form button{
+
+        align-self:center !important;
+
+        margin-top:5px;
+
+        padding:0 0 7px;
+
+        background:none;
+
+        border:none;
+
+        border-bottom:1px solid rgba(255,255,255,.65);
+
+        color:#fff;
+
+        font-family:"DM Mono",monospace;
+
+        font-size:.65rem;
+
+        letter-spacing:.2em;
+
+        cursor:pointer;
+
+    }
+
+
+    /* ==========================================
+       CONTACT DETAILS
+    ========================================== */
+
+    .contact-info{
+
+        order:2 !important;
+
+        display:flex !important;
+
+        flex-direction:column !important;
+
+        align-items:center !important;
+
+        width:100% !important;
+
+        gap:32px !important;
+
+        margin:0;
+
+        padding:0;
+
+    }
+
+
+    .info-block{
+
+        display:flex !important;
+
+        flex-direction:column !important;
+
+        align-items:center !important;
+
+        width:100%;
+
+        margin:0;
+
+        padding:0;
+
+        text-align:center !important;
+
+    }
+
+
+    .info-block h3{
+
+        margin:0 0 8px;
+
+        font-family:"DM Mono",monospace;
+
+        font-size:.58rem;
+
+        font-weight:400;
+
+        letter-spacing:.25em;
+
+        color:rgba(255,255,255,.38);
+
+    }
+
+
+    .social-link{
+
+        display:inline-flex !important;
+
+        align-items:center;
+
+        justify-content:center;
+
+        gap:8px;
+
+        max-width:100%;
+
+        font-family:"Manrope",sans-serif;
+
+        font-size:.72rem;
+
+        line-height:1.5;
+
+        color:rgba(255,255,255,.8);
+
+        text-align:center;
+
+        text-decoration:none;
+
+        word-break:break-word;
+
+    }
+
+    .social-link{
+
+        font-size:0 !important;
+
+        display:flex !important;
+
+        align-items:center !important;
+
+        justify-content:center !important;
+
+        width:20px !important;
+
+        height:20px !important;
+
+        gap:0 !important;
+
+        border:none !important;
+
+        text-decoration:none !important;
+
+    }
+
+
+    .social-link svg{
+
+        width:20px;
+
+        height:20px;
+
+        flex:0 0 20px;
+
+        fill:currentColor;
+
+    }
+
+}
+
+/* ==========================================
+   MOBILE — ICON ONLY SOCIAL LINKS
+========================================== */
+
+@media screen and (max-width:700px){
+
+    .contact-info{
+
+        display:flex !important;
+
+        flex-direction:row !important;
+
+        justify-content:center !important;
+
+        align-items:center !important;
+
+        gap:26px !important;
+
+        width:100% !important;
+
+        margin:0 !important;
+
+        padding:0 !important;
+
+    }
+
+
+    .info-block h3{
+
+        display:none !important;
+
+    }
+
+
+    .info-block{
+
+        width:auto !important;
+
+        display:flex !important;
+
+        align-items:center !important;
+
+        justify-content:center !important;
+
+        margin:0 !important;
+
+        padding:0 !important;
+
+    }
+
+
+    .social-link{
+
+        font-size:0 !important;
+
+        display:flex !important;
+
+        align-items:center !important;
+
+        justify-content:center !important;
+
+        width:20px !important;
+
+        height:20px !important;
+
+    }
+
+
+    .social-link svg{
+
+    width:25px !important;
+
+    height:25px !important;
+
+    display:block !important;
+
+    fill:currentColor;
+
+    opacity:.65;
+
+    transition:opacity .25s ease, transform .25s ease;
+
+}
+
+
+    .social-link:hover svg,
+    .social-link:active svg{
+
+        opacity:1;
+
+        transform:scale(1.08);
+
+    }
+
+}

@@ -1,0 +1,347 @@
+/* ==========================================
+   WATCH PAGE
+========================================== */
+
+.watch-page{
+
+    width:min(1200px,92%);
+
+    margin:0 auto;
+
+    padding:150px 0 120px;
+
+}
+
+/* ==========================================
+   HEADER
+========================================== */
+
+.watch-header{
+
+    text-align:center;
+
+    margin-bottom:70px;
+
+}
+
+.watch-label{
+
+    font-family:"DM Mono",monospace;
+
+    text-transform:uppercase;
+
+    letter-spacing:.4em;
+
+    color:#777;
+
+    font-size:.8rem;
+
+    margin-bottom:12px;
+
+}
+
+.watch-header h1{
+
+    font-family:"Syne",sans-serif;
+
+    font-size:clamp(7rem,7vw,7rem);
+
+    margin:0;
+
+}
+
+/* ==========================================
+   COLLECTIONS
+========================================== */
+
+.collections{
+
+    display:grid;
+
+    grid-template-columns:1fr 1fr;
+
+    gap:28px;
+
+}
+
+/* ==========================================
+   CARD
+========================================== */
+
+.collection-card{
+
+    border:1px solid rgba(255,255,255,.08);
+
+    padding:55px 45px;
+
+    cursor:pointer;
+
+    transition:.45s cubic-bezier(.22,.61,.36,1);
+
+    position:relative;
+
+    overflow:hidden;
+
+}
+
+.collection-card::after{
+
+    content:"→";
+
+    position:absolute;
+
+    right:40px;
+
+    bottom:35px;
+
+    font-size:1.4rem;
+
+    opacity:0;
+
+    transform:translateX(-12px);
+
+    transition:.35s;
+
+}
+
+.collection-card:hover{
+
+    border-color:white;
+
+    transform:translateY(-6px);
+
+}
+
+.collection-card:hover::after{
+
+    opacity:1;
+
+    transform:translateX(0);
+
+}
+
+.collection-card h2{
+
+    font-family:"Syne",sans-serif;
+
+    font-size:2rem;
+
+    margin:0 0 18px;
+
+}
+
+.collection-card p{
+
+    font-family:"Manrope",sans-serif;
+
+    color:#8f8f8f;
+
+    line-height:1.8;
+
+    margin:0;
+
+}
+
+/* ==========================================
+   BACK BUTTTON
+========================================== */
+
+.watch-nav{
+
+    display:flex;
+
+    justify-content:flex-start;
+
+    margin-bottom:35px;
+
+}
+
+.back-link{
+
+    font-family:"DM Mono", monospace;
+
+    font-size:.8rem;
+
+    letter-spacing:.25em;
+
+    text-transform:uppercase;
+
+    text-decoration:none;
+
+    color:#8b8b8b;
+
+    transition:.3s ease;
+
+}
+
+.back-link:hover{
+
+    color:white;
+
+    transform:translateX(-6px);
+
+}
+
+/* ==========================================
+   MOBILE
+========================================== */
+
+@media(max-width:850px){
+
+.collections{
+
+    grid-template-columns:1fr;
+
+}
+
+.watch-page{
+
+    width:92%;
+
+}
+
+.collection-card{
+
+    padding:40px 30px;
+
+}
+
+}
+
+/* ==========================================
+   WATCH — MOBILE HEADER
+========================================== */
+
+@media (max-width:700px){
+
+    /* CLOSED MENU — hamburger top-left */
+
+    .navbar:not(.mobile-open){
+
+        position:fixed !important;
+
+        top:22px !important;
+
+        left:22px !important;
+
+        right:auto !important;
+
+        width:42px !important;
+
+        height:42px !important;
+
+        margin:0 !important;
+
+        padding:0 !important;
+
+        transform:none !important;
+
+        z-index:10000 !important;
+
+    }
+
+
+    .navbar:not(.mobile-open) .menu-toggle{
+
+        position:absolute !important;
+
+        top:0 !important;
+
+        left:0 !important;
+
+        transform:none !important;
+
+        margin:0 !important;
+
+    }
+
+
+    /* PAGE TITLE */
+
+    .watch-header h1{
+
+        position:fixed !important;
+
+        top:28px;
+
+        left:50%;
+
+        transform:translateX(-50%);
+
+        z-index:1001;
+
+        width:max-content;
+
+        margin:0 !important;
+
+        padding:0 !important;
+
+        font-family:"Syne",sans-serif !important;
+
+        font-size:1.8rem !important;
+
+        font-weight:700 !important;
+
+        line-height:32px !important;
+
+        letter-spacing:-.025em !important;
+
+        white-space:nowrap;
+
+        text-align:center;
+
+    }
+
+
+    /* SUBTITLE */
+
+    .watch-label{
+
+        margin-top:0;
+
+        margin-bottom:-60px;
+
+        font-size:.7rem;
+
+        letter-spacing:.22em;
+
+        color:#777;
+
+    }
+
+
+    /* BACK LINK */
+
+    .watch-nav{
+
+        margin-bottom:60px;
+
+    }
+
+}
+
+@media (max-width:700px){
+
+    .watch-nav{
+
+        position:fixed !important;
+
+        top:82px !important;
+
+        left:30px !important;
+
+        margin:0 !important;
+
+        z-index:1001 !important;
+
+    }
+
+    .back-link{
+
+        font-size:.7rem !important;
+
+        letter-spacing:.16em !important;
+
+    }
+
+}
