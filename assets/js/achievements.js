@@ -692,7 +692,48 @@ const results = {
     },
 
 
-    state:{}
+    state:{
+
+        2026:[
+
+            {
+                name:"80th Senior State Aquatic Championships 2026",
+                location:"Chennai, Tamil Nadu",
+                date:"01st to 02nd June 2026",
+
+                events:[
+
+                    ["100m Freestyle","🥇 Gold","51.00"],
+                    ["100m Butterfly","🥈 Silver","56.06"],
+                    ["50m Butterfly","🥈 Silver","24.96"],
+                  
+                ]
+
+            }
+
+        ],
+
+       2025:[
+
+            {
+                name:"79th Senior State Aquatic Championships 2025",
+                location:"Chennai, Tamil Nadu",
+                date:"06th to 08th June 2025",
+
+                events:[
+
+                    ["100m Freestyle","🥈 Silver","51.79"],
+                    ["100m Butterfly","🥈 Silver","54.83"],
+                    ["50m Butterfly","🥈 Silver","25.15"],
+                  
+                ]
+
+            }
+
+        ],
+
+
+    }
 
 };
 
