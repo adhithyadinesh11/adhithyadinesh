@@ -247,7 +247,7 @@ I was six when I was first pushed into a swimming pool.
 
 Not to become a swimmer.
 
-just to get the fear of water out o fmy way...
+just to get the fear of water out of my way...
 
 Seventeen years later, I have spent most of my life in the water than on land.
 
