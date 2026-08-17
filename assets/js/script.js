@@ -247,13 +247,13 @@ I was six when I was first pushed into a swimming pool.
 
 Not to become a swimmer.
 
-I was simply afraid of water.
+just to get the fear of water out o fmy way...
 
 Seventeen years later, I have spent most of my life in the water than on land.
 
-What began as a summer coaching camp became a journey through early mornings, double sessions, school days, competition, failure, growth — and eventually, representing India on the international stage.
+What began as a summer coaching camp became a journey through early mornings, double sessions, school days, competition, failure, growth — and eventually, representing India on the international stages.
 
-A gold at the South Asian level. A bronze at the Asian level. And countless moments in between that never made the podium but shaped the athlete I became.
+A few golds at the South Asian aquatic championships, A bronze at the 10th Asian age group championships and a hundered other medals at national level gave me the spotlight i needed along with countless moments in between that never made the podium but shaped the athlete I became.
 
 Swimming taught me that progress rarely looks dramatic. Most of it happens quietly — at 5 in the morning, when nobody is watching, when you choose to get in again.
 
