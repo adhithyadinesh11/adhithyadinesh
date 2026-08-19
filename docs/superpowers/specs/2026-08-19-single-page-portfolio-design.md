@@ -234,6 +234,29 @@ only some of the properties. Any future consolidation of this codebase
 should compare declared properties, not selector names, and confirm with
 a before/after screenshot.
 
+### The systemic problem: fixed-position page furniture
+
+Found four times during implementation, so recording it as a class rather
+than four separate bugs. The old site gave several pages a
+`position:fixed` element as page furniture — a title, a backdrop. That is
+harmless when each page is its own document. On a single page a fixed
+element never scrolls away, so it floats over every other section for the
+entire page.
+
+| Where | What | Resolution |
+|---|---|---|
+| `about.css:210` | `.about-text::before` fixed "ABOUT" title | Died with the file; the new About panel has no such title |
+| `contact.css:30` | `.contact-title` fixed at `top:28px` | Rewritten to `position:static`, in flow |
+| `achievements.css:22` | `.achievements-background` fixed full-viewport blurred pool image | `position:absolute`, with `#achievements` made a positioning context. Visibly bled through the gallery panel before the fix |
+| `achievements.css:958` | `.achievements-page::before` fixed "ACHIEVEMENTS" title on mobile | Removed, and the real `<h1>` un-hidden — it had been `display:none` only because this replaced it |
+
+Legitimately fixed and left alone: `.navbar`, `.result-lightbox`,
+`.quick-summary-lightbox`.
+
+The sweep that finds these is `grep -n -B6 "position:fixed"` across every
+stylesheet the single page loads. Worth re-running if more pages are ever
+merged in.
+
 ## Bugs found on the way
 
 These are live defects in the current site, fixed as part of the work:

@@ -24,40 +24,34 @@
 
     /* ==========================================
        CONTACT PAGE TITLE
-       Centered on the same line as hamburger
+
+       This was position:fixed, which worked when contact.html was its
+       own document. On a single page a fixed element never leaves, so
+       "CONTACT" floated over the hero, About and achievements for the
+       whole scroll. Now it sits in flow with the section.
     ========================================== */
 
     .contact-title{
 
-        position:fixed !important;
+        position:static;
 
-        top:28px !important;
+        width:auto;
 
-        left:50% !important;
+        margin:0 0 40px;
 
-        transform:translateX(-50%) !important;
+        padding:0;
 
-        width:auto !important;
+        font-family:"Syne",sans-serif;
 
-        margin:0 !important;
+        font-size:2rem;
 
-        padding:0 !important;
+        font-weight:700;
 
-        z-index:1001 !important;
+        line-height:1.1;
 
-        font-family:"Syne",sans-serif !important;
+        letter-spacing:-.025em;
 
-        font-size:2rem !important;
-
-        font-weight:700 !important;
-
-        line-height:32px !important;
-
-        letter-spacing:-.025em !important;
-
-        white-space:nowrap !important;
-
-        text-align:center !important;
+        text-align:center;
 
     }
 

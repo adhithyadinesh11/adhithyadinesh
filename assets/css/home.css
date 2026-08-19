@@ -445,3 +445,163 @@ section[id]{
 
     color:#f4f1e8;
 }
+
+
+/* ==========================================
+   GALLERY PANEL
+========================================== */
+
+.gallery-panel{
+
+    padding:14vh 6vw;
+
+    background:#000;
+}
+
+
+.gallery-panel-head{
+
+    display:flex;
+    align-items:flex-end;
+    justify-content:space-between;
+    gap:24px;
+
+    margin-bottom:42px;
+}
+
+
+.gallery-panel-label{
+
+    margin:0 0 10px;
+
+    font-family:"DM Mono",monospace;
+
+    font-size:.62rem;
+
+    letter-spacing:.24em;
+
+    color:rgba(244,241,232,.45);
+}
+
+
+.gallery-panel-head h2{
+
+    margin:0;
+
+    font-family:"Syne",sans-serif;
+
+    font-size:clamp(1.5rem,3.6vw,2.9rem);
+    font-weight:700;
+
+    line-height:1.05;
+    letter-spacing:-.02em;
+
+    color:#f4f1e8;
+}
+
+
+.gallery-panel-more{
+
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+
+    min-height:44px;
+
+    padding:12px 0;
+
+    font-family:"DM Mono",monospace;
+
+    font-size:.66rem;
+
+    letter-spacing:.18em;
+
+    color:rgba(244,241,232,.6);
+
+    text-decoration:none;
+
+    white-space:nowrap;
+
+    transition:color .3s ease;
+}
+
+
+.gallery-panel-more:hover,
+.gallery-panel-more:focus-visible{
+    color:#fff;
+}
+
+
+/* 3 columns x 3 rows = 9 cells. The lead spans 2x2 = 4, leaving exactly
+   5 for the other five photos. At 4 columns the sixth photo was orphaned
+   alone on a third row. */
+
+.gallery-panel-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(3,1fr);
+    grid-auto-rows:1fr;
+
+    gap:14px;
+}
+
+
+.gallery-panel-item{
+
+    position:relative;
+
+    overflow:hidden;
+
+    display:block;
+
+    aspect-ratio:1 / 1;
+
+    background:#0b0b0b;
+}
+
+
+.gallery-panel-item.is-lead{
+
+    grid-column:span 2;
+    grid-row:span 2;
+
+    aspect-ratio:auto;
+}
+
+
+.gallery-panel-item img{
+
+    width:100%;
+    height:100%;
+
+    object-fit:cover;
+
+    display:block;
+
+    transition:
+        transform .6s cubic-bezier(.19,1,.22,1),
+        opacity .4s ease;
+}
+
+
+.gallery-panel-item:hover img{
+
+    transform:scale(1.045);
+
+    opacity:.9;
+}
+
+
+/* ==========================================
+   SECTION STACKING
+
+   #achievements holds .achievements-background, which is absolutely
+   positioned. Without a positioned ancestor it would resolve against
+   the viewport and bleed across the whole page.
+========================================== */
+
+#achievements{
+    position:relative;
+    isolation:isolate;
+}

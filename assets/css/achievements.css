@@ -19,7 +19,12 @@
 
 .achievements-background{
 
-    position:fixed;
+    /* Was position:fixed. On the standalone page that was the page
+       backdrop; on a single page a fixed element never leaves, so the
+       blurred pool image showed through every section for the whole
+       scroll. Absolute + a positioned #achievements confines it. */
+
+    position:absolute;
     inset:0;
 
     z-index:0;
@@ -948,39 +953,6 @@
 
 
     /* ==========================================
-       MOBILE HEADER
-    ========================================== */
-
-    .achievements-page::before{
-
-        content:"ACHIEVEMENTS";
-
-        position:fixed;
-
-        top:28px;
-
-        left:50%;
-
-        transform:translateX(-50%);
-
-        z-index:1001;
-
-        font-family:"Syne",sans-serif;
-
-        font-size:1.8rem;
-
-        font-weight:700;
-
-        line-height:32px;
-
-        letter-spacing:-.025em;
-
-        white-space:nowrap;
-
-    }
-
-
-    /* ==========================================
        HERO
     ========================================== */
 
@@ -992,9 +964,16 @@
 
     }
 
+    /* The real heading, shown again now that the fixed ::before title
+       that used to replace it on mobile has been removed. */
+
     .achievements-hero h1{
 
-        display:none;
+        font-size:1.8rem;
+
+        line-height:1.1;
+
+        letter-spacing:-.025em;
 
     }
 
