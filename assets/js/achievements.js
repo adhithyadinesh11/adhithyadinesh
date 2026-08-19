@@ -71,15 +71,30 @@ function scramblePB(element, finalValue, delay){
 }
 
 
-pbTimes.forEach((time,index)=>{
+/* Capture the real times before anything overwrites them, blank the
+   display, and hold the animation until the section is actually seen.
+   On a single page these used to finish during the hero. */
 
-    scramblePB(
-        time,
-        time.textContent.trim(),
-        index * 120
-    );
+const pbValues = [...pbTimes].map(time => time.textContent.trim());
 
+pbTimes.forEach(time => {
+    time.textContent = "00.00";
 });
+
+
+function startPersonalBests(){
+
+    pbTimes.forEach((time,index)=>{
+
+        scramblePB(
+            time,
+            pbValues[index],
+            index * 120
+        );
+
+    });
+
+}
 
 
 /* ==========================================
@@ -1326,13 +1341,58 @@ document.addEventListener(
 
 /* ==========================================
    INITIALISE
-========================================== */
 
-displayMedals();
+   buildYears/buildResults only construct DOM, so they stay immediate.
+   The two animations wait until the section is on screen.
+========================================== */
 
 buildYears();
 
 buildResults();
+
+
+/* ==========================================
+   ANIMATE ON FIRST VIEW
+========================================== */
+
+const achievementsSection =
+    document.querySelector("#achievements");
+
+
+function startAchievementAnimations(){
+
+    startPersonalBests();
+
+    displayMedals();
+
+}
+
+
+if(achievementsSection && "IntersectionObserver" in window){
+
+    const achievementsObserver = new IntersectionObserver(entries => {
+
+        entries.forEach(entry => {
+
+            if(!entry.isIntersecting) return;
+
+            achievementsObserver.disconnect();
+
+            startAchievementAnimations();
+
+        });
+
+    },{
+        threshold:0.15
+    });
+
+    achievementsObserver.observe(achievementsSection);
+
+}else{
+
+    startAchievementAnimations();
+
+}
 
 
 })();
