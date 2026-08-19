@@ -1,0 +1,107 @@
+/* ==========================================
+   TOKENS
+
+   --vh-cached is written by home.js from a viewport height that is
+   deliberately NOT updated when only the height changes. iOS Safari
+   collapses its URL bar mid-scroll, and a sticky panel sized from live
+   innerHeight jumps when it does.
+
+   --beat-h is a unitless multiplier of that height, so the About track
+   shortens on small screens without changing the beat maths.
+========================================== */
+
+:root{
+    --beat-h:1;
+}
+
+@media(max-width:700px){
+    :root{ --beat-h:.7; }
+}
+
+@media(max-width:500px){
+    :root{ --beat-h:.6; }
+}
+
+
+/* ==========================================
+   ANCHOR OFFSET
+
+   Sections must clear the fixed navbar when jumped to.
+========================================== */
+
+section[id]{
+    scroll-margin-top:96px;
+}
+
+@media(max-width:700px){
+    section[id]{ scroll-margin-top:80px; }
+}
+
+
+/* ==========================================
+   NAV ACTIVE STATE
+========================================== */
+
+.navbar a.active{
+    color:#fff;
+}
+
+.navbar a.active::after{
+
+    content:"";
+
+    position:absolute;
+
+    left:0;
+    right:0;
+    bottom:-6px;
+
+    width:100%;
+    height:1px;
+
+    background:rgba(255,255,255,.75);
+}
+
+
+/* ==========================================
+   CLOSING QUOTE
+========================================== */
+
+.closing{
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    min-height:100vh;
+    min-height:100dvh;
+
+    padding:12vh 8vw;
+
+    background:#000;
+}
+
+.closing-quote{
+
+    margin:0;
+
+    font-family:"Syne",sans-serif;
+
+    font-size:clamp(1.6rem,5.2vw,4.2rem);
+    font-weight:700;
+
+    line-height:1.16;
+    letter-spacing:-.025em;
+
+    color:#f4f1e8;
+
+    text-align:center;
+}
+
+.closing-quote span{
+    display:block;
+}
+
+.closing-quote span:last-child{
+    color:rgba(244,241,232,.55);
+}
