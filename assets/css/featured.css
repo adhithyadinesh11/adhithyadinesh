@@ -253,49 +253,6 @@ body.featured-page{
 
 
     /* ==========================================
-       MOBILE NAVBAR
-    ========================================== */
-
-    .featured-page .navbar:not(.mobile-open){
-
-        position:fixed !important;
-
-        top:22px !important;
-
-        left:22px !important;
-
-        right:auto !important;
-
-        width:42px !important;
-
-        height:42px !important;
-
-        margin:0 !important;
-
-        padding:0 !important;
-
-        transform:none !important;
-
-        z-index:10000 !important;
-
-    }
-
-    .featured-page .navbar:not(.mobile-open) .menu-toggle{
-
-        position:absolute !important;
-
-        top:0 !important;
-
-        left:0 !important;
-
-        transform:none !important;
-
-        margin:0 !important;
-
-    }
-
-
-    /* ==========================================
        TITLE
     ========================================== */
 

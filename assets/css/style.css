@@ -138,9 +138,10 @@ body{
 
 }
 
-/* Homepage only */
+/* Stagger the nav links in on load. This was scoped to `.home`, but no
+   page ever set that class on <body>, so it never ran. */
 
-.home .navbar a{
+.navbar a{
 
     opacity:0;
 
@@ -150,11 +151,12 @@ body{
 
 }
 
-.home .navbar a:nth-child(1){animation-delay:.2s;}
-.home .navbar a:nth-child(2){animation-delay:.3s;}
-.home .navbar a:nth-child(3){animation-delay:.4s;}
-.home .navbar a:nth-child(4){animation-delay:.5s;}
-.home .navbar a:nth-child(5){animation-delay:.6s;}
+.navbar a:nth-child(1){animation-delay:.2s;}
+.navbar a:nth-child(2){animation-delay:.3s;}
+.navbar a:nth-child(3){animation-delay:.4s;}
+.navbar a:nth-child(4){animation-delay:.5s;}
+.navbar a:nth-child(5){animation-delay:.6s;}
+.navbar a:nth-child(6){animation-delay:.7s;}
 
 .navbar a:hover{
 
@@ -450,193 +452,6 @@ body{
 }
 
 /* ==========================================
-   ACHIEVEMENTS — PERSONAL BESTS
-========================================== */
-
-.achievements-page {
-    min-height: 100vh;
-    padding: 110px 6% 80px;
-    background: #000;
-}
-
-.pb-intro {
-    width: min(100%, 1500px);
-    margin: 0 auto 28px;
-    text-align: center;
-}
-
-.eyebrow {
-    margin: 0;
-    font-family: var(--syne);
-    font-size: 1rem;
-    font-weight: 600;
-    letter-spacing: 3.5px;
-    color: var(--muted);
-}
-
-.pb-intro h1 {
-    font-family: var(--syne);
-    font-size: clamp(2.5rem, 5vw, 5rem);
-    font-weight: 700;
-    line-height: .9;
-    letter-spacing: -5px;
-    color: var(--text);
-}
-
-.personal-bests {
-    display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 25px;
-    width: min(100%, 1500px);
-    margin: 0 auto;
-}
-
-.pb-card {
-    min-height: 230px;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-}
-
-.pb-card:hover {
-    background: rgba(255, 255, 255, .025);
-}
-
-.event-name {
-    font-family: var(--syne);
-    font-size: .7rem;
-    font-weight: 600;
-    letter-spacing: 1.4px;
-    color: var(--muted);
-}
-
-.pb-time {
-    display: inline-block;
-    width: max-content;
-    margin: 72px 0 18px;
-    font-family: "DM Mono", monospace;
-    font-size: clamp(2.5rem, 4.4vw, 5rem);
-    font-weight: 500;
-    line-height: 1;
-    letter-spacing: -.12em;
-    color: var(--text);
-    font-variant-numeric: tabular-nums;
-    cursor: default;
-    transition: transform .28s cubic-bezier(.2, .8, .2, 1), color .28s ease;
-}
-
-.pb-time:hover {
-    transform: scale(1.06);
-    color: #fff;
-}
-
-.event-location {
-    max-width: 150px;
-    font-size: .72rem;
-    line-height: 1.35;
-    color: var(--muted);
-}
-
-.pb-time {
-    transform: translateY(-45px);
-}
-
-.pb-time:hover {
-    transform: translateY(-45px) scale(1.06);
-}
-
-.pb-card {
-    justify-content: flex-start;
-}
-
-.pb-time {
-    margin: 50px 0 1px;
-}
-
-.event-location {
-    margin: 0;
-}
-
-.event-location {
-    transform: translateY(-40px);
-}
-
-.event-distance {
-    font-family: "DM Mono", monospace;
-    font-weight: 500;
-    letter-spacing: 0.5em;
-}
-
-.pb-card {
-    align-items: center;
-    text-align: center;
-}
-
-.event-location {
-    margin-left: auto;
-    margin-right: auto;
-}
-
-/* ==========================================
-   MEDAL SUMMARY
-========================================== */
-
-.medal-summary {
-    width: min(100%, 1100px);
-    margin: 80px auto 110px;
-    padding: 42px 0;
-    text-align: center;
-    border-top: 1px solid var(--line);
-    border-bottom: 1px solid var(--line);
-}
-
-.summary-label {
-    margin-bottom: 40px;
-    font-family: var(--syne);
-    font-size: .7rem;
-    font-weight: 600;
-    letter-spacing: 2.5px;
-    color: var(--muted);
-}
-
-.medal-tally {
-    display: flex;
-    justify-content: center;
-    gap: clamp(45px, 11vw, 150px);
-}
-
-.medal-total {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.medal-emoji {
-    margin-bottom: 12px;
-    font-size: 1.3rem;
-}
-
-.medal-count {
-    font-family: "DM Mono", monospace;
-    font-size: clamp(2.7rem, 5vw, 4.8rem);
-    font-weight: 500;
-    line-height: 1;
-    letter-spacing: -.12em;
-    color: var(--text);
-}
-
-.medal-type {
-    margin-top: 12px;
-    font-family: var(--syne);
-    font-size: .68rem;
-    font-weight: 600;
-    letter-spacing: 1.8px;
-    color: var(--muted);
-}
-
-
-/* ==========================================
    PAGE FADE
 ========================================== */
 
@@ -706,46 +521,6 @@ body{
 
 }
 
-
-@media (max-width: 600px) {
-    .achievements-page {
-        padding: 120px 6% 60px;
-    }
-
-    .pb-intro {
-        margin-bottom: 38px;
-    }
-
-    .pb-intro h1 {
-        letter-spacing: -3px;
-    }
-
-    .personal-bests {
-        grid-template-columns: 1fr;
-    }
-
-    .pb-card {
-        min-height: 220px;
-    }
-
-    @media (max-width: 1000px) {
-    .personal-bests {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-}
-}
-
-
-@media (max-width: 520px) {
-    .medal-summary {
-        margin: 60px auto 80px;
-        padding: 34px 0;
-    }
-
-    .medal-tally {
-        gap: 30px;
-    }
-}
 
 @keyframes pageFade{
 
@@ -1234,40 +1009,40 @@ body{
 
     .navbar:not(.mobile-open){
 
-        position:fixed !important;
+        position:fixed;
 
-        top:22px !important;
+        top:22px;
 
-        left:22px !important;
+        left:22px;
 
-        right:auto !important;
+        right:auto;
 
-        width:42px !important;
+        width:42px;
 
-        height:42px !important;
+        height:42px;
 
-        margin:0 !important;
+        margin:0;
 
-        padding:0 !important;
+        padding:0;
 
-        transform:none !important;
+        transform:none;
 
-        z-index:10000 !important;
+        z-index:10000;
 
     }
 
 
     .navbar:not(.mobile-open) .menu-toggle{
 
-        position:absolute !important;
+        position:absolute;
 
-        top:0 !important;
+        top:0;
 
-        left:0 !important;
+        left:0;
 
-        transform:none !important;
+        transform:none;
 
-        margin:0 !important;
+        margin:0;
 
     }
 
@@ -1408,50 +1183,6 @@ body{
         min-height:100dvh !important;
 
         display:block !important;
-
-    }
-
-
-    /* ==========================================
-       NAVBAR — TOP LEFT
-    ========================================== */
-
-    .featured-page .navbar:not(.mobile-open){
-
-        position:fixed !important;
-
-        top:22px !important;
-
-        left:22px !important;
-
-        right:auto !important;
-
-        width:42px !important;
-
-        height:42px !important;
-
-        margin:0 !important;
-
-        padding:0 !important;
-
-        transform:none !important;
-
-        z-index:10000 !important;
-
-    }
-
-
-    .featured-page .navbar:not(.mobile-open) .menu-toggle{
-
-        position:absolute !important;
-
-        top:0 !important;
-
-        left:0 !important;
-
-        transform:none !important;
-
-        margin:0 !important;
 
     }
 

@@ -115,6 +115,11 @@ if (page) {
 
     document.querySelectorAll(".navbar a").forEach(link => {
 
+        /* In-page anchors must scroll, not reload. Only fade for links
+           that genuinely leave the current document. */
+
+        if (link.getAttribute("href").startsWith("#")) return;
+
         if (link.pathname === window.location.pathname) return;
 
         link.addEventListener("click", function (e) {
@@ -136,99 +141,6 @@ if (page) {
 
 }
 
-
-/* ==========================================
-   PERSONAL-BEST TIME SCRAMBLE
-========================================== */
-
-const personalBestTimes = document.querySelectorAll(".pb-time");
-
-function scrambleTime(element, finalTime, delay) {
-
-    const characters = "0123456789";
-
-    setTimeout(() => {
-
-        let frame = 0;
-        const totalFrames = 15;
-
-        const animation = setInterval(() => {
-
-            const revealPoint = Math.floor((frame / totalFrames) * finalTime.length);
-
-            element.textContent = finalTime
-                .split("")
-                .map((character,index)=>{
-
-                    if(character === ".") return ".";
-
-                    return index < revealPoint
-                        ? finalTime[index]
-                        : characters[Math.floor(Math.random()*characters.length)];
-
-                })
-                .join("");
-
-            frame++;
-
-            if(frame > totalFrames){
-
-                clearInterval(animation);
-
-                element.textContent = finalTime;
-
-            }
-
-        },35);
-
-    },delay);
-
-}
-
-personalBestTimes.forEach((time,index)=>{
-
-    scrambleTime(time,time.dataset.time,40+index*65);
-
-});
-
-
-/* ==========================================
-   MEDAL SUMMARY COUNT-UP
-========================================== */
-
-const medalCounts = document.querySelectorAll(".medal-count");
-
-medalCounts.forEach(count=>{
-
-    const target = Number(count.dataset.count);
-
-    const duration = 550;
-
-    const startTime = performance.now();
-
-    function updateCount(currentTime){
-
-        const progress = Math.min((currentTime-startTime)/duration,1);
-
-        const value = Math.floor(progress*target);
-
-        count.textContent = String(value).padStart(2,"0");
-
-        if(progress<1){
-
-            requestAnimationFrame(updateCount);
-
-        }else{
-
-            count.textContent = String(target).padStart(2,"0");
-
-        }
-
-    }
-
-    requestAnimationFrame(updateCount);
-
-});
 
 /* ==========================================
    ABOUT PAGE — FULL SCREEN TYPEWRITER

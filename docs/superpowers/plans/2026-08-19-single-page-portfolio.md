@@ -374,7 +374,23 @@ grep -n "pb-card\|medal-tally\|achievements-page" assets/css/style.css
 grep -c "{" assets/css/style.css && grep -c "}" assets/css/style.css
 ```
 
-Expected: the `grep` for the selectors prints nothing, and the brace counts match each other.
+Expected: the brace counts match each other. But the selector `grep` will still report four hits at roughly lines 524–558 — **a second layer of duplication the spec's collision scan missed**, inside `@media (max-width: 600px)` and `@media (max-width: 520px)`. Delete those too, lines **523–562**:
+
+```bash
+awk 'NR>=521 && NR<=523 {printf "%d: %s\n", NR, $0}' assets/css/style.css
+awk 'NR>=560 && NR<=564 {printf "%d: %s\n", NR, $0}' assets/css/style.css  # 563 must be @keyframes pageFade
+sed -i '' '523,562d' assets/css/style.css
+grep -n "pb-card\|medal-tally\|achievements-page\|medal-summary\|pb-intro\|personal-bests" assets/css/style.css
+```
+
+Both blocks are safe to remove, for two independent reasons:
+
+- `.pb-intro` and `.personal-bests` match **zero** elements in the markup — leftovers from an earlier design.
+- `.achievements-page`, `.pb-card`, `.medal-summary` and `.medal-tally` are all redefined at mobile widths inside `achievements.css` (lines 941, 1059, 1111, 1125, and again at 1300, 1316, 1346), which loads afterwards and already wins.
+
+Deleting them also removes a nested `@media (max-width: 1000px)` sitting *inside* the `600px` block, whose outer condition made the inner one unreachable above 600px.
+
+Expected after this second cut: the selector `grep` prints nothing, braces balance, and 227 lines total have left `style.css`.
 
 - [ ] **Step 7: Verify achievements still renders identically**
 
@@ -410,9 +426,44 @@ Keep these rules where they already sit, after the base `.navbar a` block, so th
 
 - [ ] **Step 9: Consolidate the duplicated mobile nav hack**
 
-Three files re-hack the same shared element with `!important`: `about.css:243`, `achievements.css:987`, `gallery.css:525`. Each forces `.navbar:not(.mobile-open)` into a 42px top-left button. Once several of these load on one page they fight over the same declarations.
+**Corrected during execution.** The spec's collision table said three files carried this hack. The real count is **seven**, and `style.css` already holds a canonical copy — at `style.css:1010`, which *looks* homepage-scoped because it sits under a section comment reading `HOMEPAGE — FINAL MOBILE FIX`, but whose selector `.navbar:not(.mobile-open)` is unscoped and so applies to every page. So there is nothing to add; there are six redundant copies to remove.
 
-Add one canonical copy to `style.css`, inside its existing `@media(max-width:700px)` block in the `MOBILE NAVIGATION` area:
+Two of the copies are in files `index.html` will load (`contact.css`, `featured.css`), which is why they matter rather than being merely untidy.
+
+First strip `!important` from the canonical rule. It is safe to remove: `.navbar:not(.mobile-open)` is two classes' worth of specificity against the base `.navbar` rule's one, and it appears later in the file, so it wins on both counts without help.
+
+```bash
+sed -i '' '1010,1047s/ *!important//g' assets/css/style.css
+awk 'NR>=1010 && NR<=1014 {printf "%d: %s\n", NR, $0}' assets/css/style.css
+```
+
+Then delete the redundant copies. Work **highest line number first within a file**, or earlier deletions shift the later ranges:
+
+| File | Delete | Note |
+|---|---|---|
+| `assets/css/style.css` | `1190-1233` | a `.featured-page`-prefixed clone, byte-identical to 1010 |
+| `assets/css/featured.css` | `255-297` | inert after Task 6 anyway, since `.featured-page` moves onto a section and the nav is not its descendant |
+| `assets/css/contact.css` | `25-72` | dedented to column 0, which makes it *look* top-level; it is in fact inside the `@media screen and (max-width:700px)` opened at line 5 |
+| `assets/css/achievements.css` | `983-1025` | line 1026 opens `HERO` and must survive |
+| `assets/css/gallery.css` | `519-565` | brings its own `@media` wrapper; line 566 opens a different `@media` holding `.gallery-top` |
+
+`about.css`, `watch.css`, `race.css` and `swim.css` keep their copies — Task 11 deletes those files, and only the old pages load them until then.
+
+Verify placement and balance afterwards:
+
+```bash
+grep -rln "navbar:not(.mobile-open)" assets/css/
+for f in style achievements gallery featured contact; do
+  o=$(grep -o '{' assets/css/$f.css | wc -l | tr -d ' ')
+  c=$(grep -o '}' assets/css/$f.css | wc -l | tr -d ' ')
+  printf "  %-18s %s / %s  %s\n" "$f.css" "$o" "$c" "$([ "$o" = "$c" ] && echo OK || echo MISMATCH)"
+done
+```
+
+Expected: only `style.css` plus the four Task-11 casualties are listed, and every brace count matches.
+
+<details>
+<summary>The canonical rule, for reference — already present at <code>style.css:1010</code>, do not re-add</summary>
 
 ```css
 @media(max-width:700px){
@@ -451,34 +502,7 @@ Add one canonical copy to `style.css`, inside its existing `@media(max-width:700
 }
 ```
 
-Then delete the copies from the two files that survive. `about.css` keeps its copy — Task 11 deletes that file wholesale, and `about.html` is the only page loading it until then, so editing it now is wasted risk.
-
-`achievements.css` — delete **983 through 1025**. Line 983 opens the `HAMBURGER` comment; 1026 opens `HERO`, which must survive:
-
-```bash
-sed -n '982,990p' assets/css/achievements.css    # 983 must be the /* === opener
-sed -n '1018,1032p' assets/css/achievements.css  # 1026 must open HERO
-sed -i '' '983,1025d' assets/css/achievements.css
-```
-
-`gallery.css` — delete **519 through 565**. This block brings its own `@media (max-width:700px)` wrapper, so the whole wrapper goes. Line 566 opens a *different* `@media` block holding `.gallery-top`, which must survive:
-
-```bash
-sed -n '517,524p' assets/css/gallery.css   # 519 must be the /* === opener
-sed -n '562,567p' assets/css/gallery.css   # 566 must open the .gallery-top media block
-sed -i '' '519,565d' assets/css/gallery.css
-```
-
-Confirm only `style.css` and `about.css` define the hack now, and that both edited files still balance:
-
-```bash
-grep -rn "navbar:not(.mobile-open)" assets/css/
-for f in achievements gallery; do
-  echo -n "$f: "; grep -c "{" assets/css/$f.css; echo -n "     "; grep -c "}" assets/css/$f.css
-done
-```
-
-Expected: matches only in `style.css` and `about.css`, and matching brace counts per file.
+</details>
 
 - [ ] **Step 10: Verify the mobile nav on every page**
 
@@ -2046,7 +2070,44 @@ Copy `contact.html:39-156` — `<section class="contact-page">` through its `</s
 
 Every hidden input must survive verbatim: `access_key`, `subject`, `from_name`, `botcheck`, `redirect`. The LinkedIn href must carry the `https://` added in Task 2.
 
-- [ ] **Step 3: Verify the form is intact**
+- [ ] **Step 3: Neutralise the fixed-position CONTACT title**
+
+**Found during Task 2.** `contact.css` pins the page title to the viewport on mobile:
+
+```css
+    .contact-title{
+        position:fixed !important;
+        top:28px !important;
+        left:50% !important;
+        transform:translateX(-50%) !important;
+```
+
+That was fine when `contact.html` was its own document. On a single page a fixed element never leaves, so `CONTACT` would float over the hero, About, achievements — everything — for the entire scroll. This is the same leak class as the `position:fixed` "ABOUT" title in `about.css:210`, which Task 11 removes by deleting the file; here the file survives, so the rule has to change.
+
+Replace `position:fixed` with `position:static` and drop the offsets, keeping the centring:
+
+```bash
+grep -n "contact-title" assets/css/contact.css
+```
+
+Then in the mobile block, rewrite the rule as:
+
+```css
+    .contact-title{
+
+        position:static;
+
+        width:auto;
+
+        margin:0 0 40px;
+
+        text-align:center;
+    }
+```
+
+Verify by scrolling the whole single page at 390px wide: the word `CONTACT` must appear **only** when the contact section is on screen, and must never overlap the hero or the About panel.
+
+- [ ] **Step 4: Verify the form is intact**
 
 ```bash
 node tools/verify.js
@@ -2054,7 +2115,7 @@ node tools/verify.js
 
 Expected: `PASS`. This is the check that catches a dropped hidden field — the form would still look fine and silently fail to deliver.
 
-- [ ] **Step 4: Verify in the browser**
+- [ ] **Step 5: Verify in the browser**
 
 Expected:
 - `CONTACT` heading, four info blocks with SVG icons, the form beside them.
@@ -2062,7 +2123,7 @@ Expected:
 - Submitting with a name, email and message reaches the Web3Forms success page.
 - Nav `CONTACT` scrolls here; the nav item lights up on arrival.
 
-- [ ] **Step 5: Commit**
+- [ ] **Step 6: Commit**
 
 ```bash
 git add index.html
