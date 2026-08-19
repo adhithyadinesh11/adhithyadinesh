@@ -105,3 +105,343 @@ section[id]{
 .closing-quote span:last-child{
     color:rgba(244,241,232,.55);
 }
+
+
+/* ==========================================
+   ABOUT — SCROLL TRACK
+
+   The track is tall; the panel inside it sticks. Height comes from the
+   cached viewport value so the maths in home.js and the layout here
+   always agree.
+========================================== */
+
+.about-stage{
+
+    position:relative;
+
+    height:calc(var(--beats) * var(--beat-h) * var(--vh-cached, 100vh));
+
+    background:#000;
+}
+
+
+.about-panel{
+
+    position:sticky;
+    top:0;
+
+    overflow:hidden;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    height:100vh;
+    height:var(--vh-cached, 100dvh);
+
+    padding:12vh 10vw;
+}
+
+
+/* ==========================================
+   BACKDROP
+========================================== */
+
+.about-backdrop{
+
+    position:absolute;
+    inset:-15px;
+
+    background:url("../images/about.jpg") center center / cover no-repeat;
+
+    filter:blur(7px);
+
+    transform:scale(1.05);
+
+    z-index:0;
+}
+
+
+.about-panel::after{
+
+    content:"";
+
+    position:absolute;
+    inset:0;
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(0,0,0,.88) 0%,
+            rgba(0,0,0,.68) 45%,
+            rgba(0,0,0,.48) 75%,
+            rgba(0,0,0,.74) 100%
+        );
+
+    pointer-events:none;
+
+    z-index:1;
+}
+
+
+/* ==========================================
+   BEATS
+
+   All beats are stacked; exactly one carries .is-active. Only opacity
+   and transform animate, so transitions stay off the layout path.
+========================================== */
+
+.about-beats{
+
+    position:relative;
+
+    z-index:2;
+
+    width:min(900px,100%);
+}
+
+
+.beat{
+
+    position:absolute;
+
+    top:50%;
+    left:0;
+    right:0;
+
+    /* -50% keeps each beat vertically centred whatever its own height,
+       so a long beat grows in both directions instead of running off the
+       bottom of a short viewport. The extra 12px is the rise-in. */
+
+    transform:translateY(calc(-50% + 12px));
+
+    opacity:0;
+
+    transition:
+        opacity .5s ease,
+        transform .5s ease;
+
+    pointer-events:none;
+}
+
+
+.beat.is-active{
+
+    opacity:1;
+
+    transform:translateY(-50%);
+}
+
+
+.beat p{
+
+    margin:0 0 .9em;
+
+    font-family:"DM Mono",monospace;
+
+    font-size:clamp(.95rem,1.5vw,1.35rem);
+
+    line-height:1.55;
+    letter-spacing:.01em;
+
+    color:rgba(244,241,232,.88);
+
+    text-shadow:
+        0 0 6px rgba(150,230,240,.28),
+        0 0 18px rgba(80,200,220,.12),
+        0 2px 12px rgba(0,0,0,.55);
+}
+
+
+.beat p:last-child{
+    margin-bottom:0;
+}
+
+
+.beat-final p{
+
+    font-family:"Syne",sans-serif;
+
+    font-size:clamp(1.5rem,4vw,3rem);
+    font-weight:700;
+
+    line-height:1.15;
+    letter-spacing:-.02em;
+
+    color:#f4f1e8;
+}
+
+
+/* ==========================================
+   PROGRESS TICKS
+========================================== */
+
+.beat-progress{
+
+    position:absolute;
+
+    left:max(3vw,18px);
+    top:50%;
+
+    transform:translateY(-50%);
+
+    z-index:3;
+
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+
+    margin:0;
+    padding:0;
+
+    list-style:none;
+}
+
+
+.beat-progress li{
+
+    width:2px;
+    height:16px;
+
+    background:rgba(255,255,255,.22);
+
+    transition:background .35s ease;
+}
+
+
+.beat-progress li.is-active{
+    background:rgba(255,255,255,.85);
+}
+
+
+/* ==========================================
+   SKIP
+
+   Bottom centre, 44px minimum hit area. On a phone this is the escape
+   hatch from several screens of scrolling, so it must be reachable.
+========================================== */
+
+.about-skip{
+
+    position:absolute;
+
+    left:50%;
+    bottom:24px;
+
+    transform:translateX(-50%);
+
+    z-index:4;
+
+    min-width:88px;
+    min-height:44px;
+
+    padding:12px 18px;
+
+    background:none;
+    border:1px solid rgba(255,255,255,.18);
+    border-radius:2px;
+
+    font-family:"DM Mono",monospace;
+
+    font-size:.62rem;
+
+    letter-spacing:.2em;
+
+    color:rgba(255,255,255,.55);
+
+    cursor:pointer;
+
+    transition:
+        color .3s ease,
+        border-color .3s ease;
+}
+
+
+.about-skip:hover,
+.about-skip:focus-visible{
+
+    color:#fff;
+
+    border-color:rgba(255,255,255,.5);
+}
+
+
+/* ==========================================
+   FULL TEXT — hidden until skipped
+========================================== */
+
+.about-full{
+    display:none;
+}
+
+
+/* ==========================================
+   SKIPPED STATE
+
+   Collapse the track, release the panel, swap beats for the full story.
+========================================== */
+
+.about-stage.is-skipped{
+    height:auto;
+}
+
+
+.about-stage.is-skipped .about-panel{
+
+    position:static;
+
+    height:auto;
+
+    min-height:100vh;
+    min-height:100dvh;
+
+    align-items:flex-start;
+}
+
+
+.about-stage.is-skipped .about-beats,
+.about-stage.is-skipped .beat-progress,
+.about-stage.is-skipped .about-skip{
+    display:none;
+}
+
+
+.about-stage.is-skipped .about-full{
+
+    display:block;
+
+    position:relative;
+
+    z-index:2;
+
+    width:min(900px,100%);
+
+    margin:0 auto;
+}
+
+
+.about-full p{
+
+    margin:0 0 1.15em;
+
+    font-family:"DM Mono",monospace;
+
+    font-size:clamp(.9rem,1.3vw,1.15rem);
+
+    line-height:1.6;
+
+    color:rgba(244,241,232,.85);
+}
+
+
+.about-full p:last-child{
+
+    margin-top:1.6em;
+
+    font-family:"Syne",sans-serif;
+
+    font-size:clamp(1.2rem,2.6vw,2rem);
+    font-weight:700;
+
+    color:#f4f1e8;
+}

@@ -83,3 +83,121 @@ if(spySections.length){
     spySections.forEach(section => spy.observe(section));
 
 }
+
+
+/* ==========================================
+   ABOUT — BEAT DRIVER
+
+   Maps scroll position within the track to one active beat. Reads the
+   cached viewport height, never live innerHeight, so a collapsing
+   mobile toolbar cannot shift the boundaries mid-gesture.
+========================================== */
+
+const aboutStage = document.querySelector(".about-stage");
+
+if(aboutStage){
+
+    const beats = [...aboutStage.querySelectorAll(".beat")];
+
+    const ticks = [...aboutStage.querySelectorAll(".beat-progress li")];
+
+    const skipButton = aboutStage.querySelector(".about-skip");
+
+    let activeBeat = 0;
+    let frameQueued = false;
+    let skipped = false;
+
+
+    function setActiveBeat(next){
+
+        if(next === activeBeat) return;
+
+        beats[activeBeat].classList.remove("is-active");
+
+        if(ticks[activeBeat]){
+            ticks[activeBeat].classList.remove("is-active");
+        }
+
+        activeBeat = next;
+
+        beats[activeBeat].classList.add("is-active");
+
+        if(ticks[activeBeat]){
+            ticks[activeBeat].classList.add("is-active");
+        }
+
+    }
+
+
+    function measure(){
+
+        const travel = aboutStage.offsetHeight - cachedHeight;
+
+        if(travel <= 0) return;
+
+        const offset = -aboutStage.getBoundingClientRect().top;
+
+        const progress = Math.min(Math.max(offset / travel, 0), 1);
+
+        setActiveBeat(
+            Math.min(
+                beats.length - 1,
+                Math.floor(progress * beats.length)
+            )
+        );
+
+    }
+
+
+    function onScroll(){
+
+        if(frameQueued || skipped) return;
+
+        frameQueued = true;
+
+        requestAnimationFrame(() => {
+            frameQueued = false;
+            measure();
+        });
+
+    }
+
+
+    function skip(){
+
+        if(skipped) return;
+
+        skipped = true;
+
+        aboutStage.classList.add("is-skipped");
+
+        window.removeEventListener("scroll", onScroll);
+
+    }
+
+
+    skipButton.addEventListener("click", skip);
+
+
+    document.addEventListener("keydown", event => {
+
+        if(event.key === "Enter" && !skipped){
+            skip();
+        }
+
+    });
+
+
+    if(window.matchMedia("(prefers-reduced-motion: reduce)").matches){
+
+        skip();
+
+    }else{
+
+        window.addEventListener("scroll", onScroll, { passive:true });
+
+        measure();
+
+    }
+
+}
