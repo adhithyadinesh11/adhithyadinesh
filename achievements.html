@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Achievements</title>
+
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/achievements.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@300;400;500;600&family=Syne:wght@500;600;700;800&family=IBM+Plex+Sans:wght@500;600;700&display=swap" rel="stylesheet">
+
+</head>
+
+
+<body>
+
+    <div class="achievements-background"></div>
+
+
+<!-- ==========================================
+     NAVIGATION
+========================================== -->
+
+<nav class="navbar">
+
+    <a href="index.html">HOME</a>
+
+    <a href="about.html">ABOUT</a>
+
+    <a href="achievements.html" class="active">ACHIEVEMENTS</a>
+
+    <a href="featured.html">FEATURED</a>
+
+    <a href="gallery.html">GALLERY</a>
+
+    <a href="contact.html">CONTACT</a>
+
+</nav>
+
+
+<!-- ==========================================
+     PAGE
+========================================== -->
+
+<main class="achievements-page">
+
+
+    <!-- ==========================================
+         HERO
+    ========================================== -->
+
+    <section class="achievements-hero">
+
+        <h1>ACHIEVEMENTS</h1>
+
+    </section>
+
+
+    <!-- ==========================================
+         PERSONAL BESTS
+    ========================================== -->
+
+    <section class="pbs">
+
+        <div class="section-title">
+
+            PERSONAL BESTS
+
+        </div>
+
+
+        <div class="pb-list">
+
+
+            <div class="pb-card">
+
+                <div class="pb-time">24.59</div>
+
+                <div class="pb-event">50M BUTTERFLY</div>
+
+                <div class="pb-meet">
+                    79th Senior National Aquatic Championships 2024
+                </div>
+
+            </div>
+
+
+            <div class="pb-card">
+
+                <div class="pb-time">54.83</div>
+
+                <div class="pb-event">100M BUTTERFLY</div>
+
+                <div class="pb-meet">
+                    79th Senior State Aquatic Championships 2025
+                </div>
+
+            </div>
+
+
+            <div class="pb-card">
+
+                <div class="pb-time">23.68</div>
+
+                <div class="pb-event">50M FREESTYLE</div>
+
+                <div class="pb-meet">
+                    1st All India Invitational Senior Nationals 2021
+                </div>
+
+            </div>
+
+
+            <div class="pb-card">
+
+                <div class="pb-time">51.15</div>
+
+                <div class="pb-event">100M FREESTYLE</div>
+
+                <div class="pb-meet">
+                    79th Senior National Aquatic Championships 2026
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+
+    <hr class="divider">
+
+
+    <!-- ==========================================
+         MEDAL SUMMARY
+    ========================================== -->
+
+    <section class="medal-summary">
+
+        <div class="section-title">
+
+            MEDAL SUMMARY
+
+        </div>
+
+
+        <div class="medal-tally">
+
+
+            <div class="medal-item">
+
+                <div class="medal-emoji">🥇</div>
+
+                <div id="gold-count" class="achievement-medal-count">
+                    00
+                </div>
+
+                <div class="medal-label">
+                    GOLD
+                </div>
+
+            </div>
+
+
+            <div class="medal-item">
+
+                <div class="medal-emoji">🥈</div>
+
+                <div id="silver-count" class="achievement-medal-count">
+                    00
+                </div>
+
+                <div class="medal-label">
+                    SILVER
+                </div>
+
+            </div>
+
+
+            <div class="medal-item">
+
+                <div class="medal-emoji">🥉</div>
+
+                <div id="bronze-count" class="achievement-medal-count">
+                    00
+                </div>
+
+                <div class="medal-label">
+                    BRONZE
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+
+    <!-- ==========================================
+     QUICK SUMMARY
+    ========================================== -->
+
+    <div class="quick-summary-trigger">
+
+        <button type="button" id="quick-summary-open">
+            QUICK SUMMARY <span>→</span>
+        </button>
+
+    </div>
+
+    <hr class="divider">
+
+
+    <!-- ==========================================
+         RESULTS
+    ========================================== -->
+
+    <section class="results">
+
+
+        <div class="section-title">
+
+            RESULTS
+
+        </div>
+
+
+        <!-- CATEGORY -->
+
+        <div class="result-tabs">
+
+            <button type="button" class="result-tab active">
+                INTERNATIONAL
+            </button>
+
+            <button type="button" class="result-tab">
+                NATIONAL
+            </button>
+
+            <button type="button" class="result-tab">
+                STATE
+            </button>
+
+        </div>
+
+
+        <!-- YEARS -->
+
+        <div class="year-selector">
+
+            <!-- Generated automatically -->
+
+        </div>
+
+
+        <!-- COMPETITIONS -->
+
+        <div id="results-container">
+
+            <!-- Generated automatically -->
+
+        </div>
+
+
+    </section>
+
+
+</main>
+
+
+<!-- ==========================================
+     RESULT LIGHTBOX
+========================================== -->
+
+<div class="result-lightbox">
+
+
+    <div class="lightbox-content">
+
+
+        <button
+            type="button"
+            class="lightbox-close"
+            aria-label="Close">
+            &times;
+        </button>
+
+
+        <p class="lightbox-location"></p>
+
+        <h2 class="lightbox-title"></h2>
+
+        <p class="lightbox-date"></p>
+
+
+        <div class="lightbox-events">
+
+            <!-- Generated automatically -->
+
+        </div>
+
+
+    </div>
+
+</div>
+
+<!-- ==========================================
+     QUICK SUMMARY LIGHTBOX
+========================================== -->
+
+<div class="quick-summary-lightbox" id="quick-summary-lightbox">
+
+    <div class="quick-summary-content">
+
+        <button
+            type="button"
+            class="quick-summary-close"
+            id="quick-summary-close"
+            aria-label="Close">
+            &times;
+        </button>
+
+
+        <div class="quick-summary-header">
+
+            <p>CAREER HIGHLIGHTS</p>
+
+            <h2>QUICK<br>SUMMARY</h2>
+
+        </div>
+
+
+        <div class="quick-summary-list">
+
+
+            <div class="quick-summary-item">
+
+                <span class="summary-number">01</span>
+
+                <div>
+
+                    <h3>INTERNATIONAL</h3>
+
+                    <p>
+                        Competed at international championships,
+                        including the South Asian Aquatic Championships
+                        and Asian Age Group Championships.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="quick-summary-item">
+
+                <span class="summary-number">02</span>
+
+                <div>
+
+                    <h3>SENIOR NATIONALS</h3>
+
+                    <p>
+                        Multiple medal-winning performances at the
+                        Senior National Aquatic Championships across
+                        individual and relay events.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="quick-summary-item">
+
+                <span class="summary-number">03</span>
+
+                <div>
+
+                    <h3>NATIONAL RECORDS</h3>
+
+                    <p>
+                        Gold-medal relay performances recorded as
+                        National Meet Records at the Senior National
+                        Championships.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="quick-summary-item">
+
+                <span class="summary-number">04</span>
+
+                <div>
+
+                    <h3>KHELO INDIA</h3>
+
+                    <p>
+                        Gold medal performances at the Khelo India
+                        Games, alongside multiple podium finishes
+                        across national competitions.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="quick-summary-item">
+
+                <span class="summary-number">05</span>
+
+                <div>
+
+                    <h3>UNIVERSITY</h3>
+
+                    <p>
+                        Multiple podium finishes at the All India
+                        Inter-University Aquatic Championships,
+                        including individual and relay events.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="quick-summary-item">
+
+                <span class="summary-number">06</span>
+
+                <div>
+
+                    <h3>SPECIALITY</h3>
+
+                    <p>
+                        Butterfly, sprint freestyle and relay events
+                        form the foundation of a career spanning
+                        junior, senior and international competition.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- ==========================================
+     SCRIPTS
+========================================== -->
+
+<script src="assets/js/script.js"></script>
+
+<!-- v3 prevents an old cached achievements.js from being used -->
+<script src="assets/js/achievements.js?v=3"></script>
+
+
+</body>
+
+</html>
