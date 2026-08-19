@@ -214,7 +214,7 @@ a time. Several files re-hack the same shared elements with
 | Collision | Resolution |
 |---|---|
 `.navbar:not(.mobile-open)` mobile hack duplicated with `!important` in `about.css:243`, `achievements.css:987`, `gallery.css:525` | One canonical rule in `style.css`; per-page copies deleted |
-`.pb-card`, `.pb-time`, `.medal-count`, `.medal-emoji`, `.medal-summary`, `.medal-tally`, `.achievements-page`, `.event-name` defined in **both** `style.css:453-638` and `achievements.css` | Remove the `style.css` copies; `achievements.css` is the live version |
+~~`.pb-card`, `.pb-time`, `.medal-count`, … defined in both `style.css:452-638` and `achievements.css`~~ | **Retracted — these are NOT duplicates.** `achievements.css` is a tuning layer that declares only `margin-bottom:-30px` on `.pb-time` and relies on `style.css` for `margin-top` and `transform`. Removing the base collapses the personal-best times onto their labels. Verified by screenshot; leave both files alone. |
 `.lightbox-close` in both `achievements.css` and `gallery.css` | Never co-load under this plan — panel photos link out instead of opening a local lightbox |
 Three overlapping mobile layers in `style.css` (`HOMEPAGE — MOBILE`, `FINAL MOBILE FIX`, `MOBILE BRIGHTNESS`) | Fold into one homepage-mobile block |
 `about.css:210` injects a **`position:fixed`** "ABOUT" title via `.about-text::before` at `z-index:1001` | Deleted with `about.css`. On a single page a fixed element leaks across every section, so this cannot be ported |
@@ -223,6 +223,16 @@ Seven different breakpoints in use (1000, 900, 850, 700, 600, 520, 500) | Standa
 
 Load order on `index.html`: `style.css` → `achievements.css` →
 `featured.css` → `home.css`.
+
+### A note on how that row was wrong
+
+The collision table was built by intersecting the *selector* names each
+file defines. That finds files which mention the same selectors; it does
+not distinguish a duplicate from a base-plus-override pair. Two files can
+share every selector and still both be required, if the second declares
+only some of the properties. Any future consolidation of this codebase
+should compare declared properties, not selector names, and confirm with
+a before/after screenshot.
 
 ## Bugs found on the way
 

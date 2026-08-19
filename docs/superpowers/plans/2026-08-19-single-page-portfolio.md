@@ -360,38 +360,43 @@ Replace with:
         if (link.pathname === window.location.pathname) return;
 ```
 
-- [ ] **Step 6: Delete the duplicated achievements CSS from `style.css`**
+- [ ] **Step 6: Do NOT delete the achievements CSS in `style.css`**
 
-`style.css:453-638` defines `.achievements-page`, `.pb-card`, `.pb-time`, `.event-name`, `.medal-summary`, `.medal-tally`, `.medal-count` and `.medal-emoji`. `achievements.css` defines all of them again and, loading second, wins. The `style.css` copies are dead weight that will silently fight the real rules once everything shares one page.
+**The spec was wrong about this, and following it breaks the page.** Recorded here so nobody repeats it.
 
-Delete lines **452 through 638** — 452 is the `/* ===` opening `ACHIEVEMENTS — PERSONAL BESTS`, and 639 is the `/* ===` opening `PAGE FADE`, which must survive.
+The spec's collision table claimed `style.css:452-638` merely duplicated `achievements.css`, on the evidence that both define `.achievements-page`, `.pb-card`, `.pb-time`, `.medal-summary`, `.medal-tally` and `.medal-emoji`. That evidence was insufficient: it establishes that both files **mention** the same selectors, not that either supplies the same **properties**.
 
-```bash
-sed -n '449,455p' assets/css/style.css   # 452 must be the /* === opener
-sed -n '634,642p' assets/css/style.css   # 639 must be the next /* === opener
-sed -i '' '452,638d' assets/css/style.css
-grep -n "pb-card\|medal-tally\|achievements-page" assets/css/style.css
-grep -c "{" assets/css/style.css && grep -c "}" assets/css/style.css
+They do not. The two files are a base layer plus a tuning layer:
+
+```css
+/* style.css — the base */
+.pb-time { margin: 50px 0 1px; transform: translateY(-45px); ... }
+
+/* achievements.css — loads second, tunes on top */
+.pb-time { margin-bottom:-30px; font-family:"IBM Plex Sans"; ... }
 ```
 
-Expected: the brace counts match each other. But the selector `grep` will still report four hits at roughly lines 524–558 — **a second layer of duplication the spec's collision scan missed**, inside `@media (max-width: 600px)` and `@media (max-width: 520px)`. Delete those too, lines **523–562**:
+`achievements.css` declares only `margin-bottom`, so `margin-top: 50px` and the `translateY(-45px)` come from `style.css` alone. Delete the base and the negative `margin-bottom` survives with nothing to offset it: the personal-best times collapse upward onto their event labels and `MEDAL SUMMARY` lands on top of the meet names.
+
+Verified by screenshot — deleting the block produced visible overlap; restoring it reproduced the baseline pixel-for-pixel.
+
+So: **leave `style.css:452-638` and the mobile blocks at `523-562` alone.** Roughly eleven rules in there are genuinely dead (`.pb-intro`, `.personal-bests`, `.eyebrow`, `.event-name`, `.event-location`, `.event-distance`, `.summary-label`, `.medal-total`, `.medal-count`, `.medal-type`, and `.pb-intro h1` match no markup), but they are interleaved with the six live ones and picking them apart risks the same regression for no user-visible gain. Not worth it.
+
+Apply only the changes that are provably safe:
+
+| Change | Why it is safe |
+|---|---|
+| Delete the `.featured-page .navbar:not(.mobile-open)` clone (`style.css:1415-1458`) | Byte-identical to the canonical rule at `1235`, differing only by the inert `.featured-page` prefix |
+| Strip `!important` from the canonical nav rule (`style.css:1235-1272`) | `.navbar:not(.mobile-open)` outranks the base `.navbar` on specificity and appears later in the file, so it wins unaided |
+| Fix the `.home .navbar a` stagger selector and add a sixth delay | The selector matched nothing, so changing it cannot regress anything that was working |
 
 ```bash
-awk 'NR>=521 && NR<=523 {printf "%d: %s\n", NR, $0}' assets/css/style.css
-awk 'NR>=560 && NR<=564 {printf "%d: %s\n", NR, $0}' assets/css/style.css  # 563 must be @keyframes pageFade
-sed -i '' '523,562d' assets/css/style.css
-grep -n "pb-card\|medal-tally\|achievements-page\|medal-summary\|pb-intro\|personal-bests" assets/css/style.css
+sed -i '' '1415,1458d' assets/css/style.css              # highest range first
+grep -n "^\s*\.navbar:not(.mobile-open)" assets/css/style.css   # re-locate after the shift
+sed -i '' '1235,1272s/ *!important//g' assets/css/style.css
 ```
 
-Both blocks are safe to remove, for two independent reasons:
-
-- `.pb-intro` and `.personal-bests` match **zero** elements in the markup — leftovers from an earlier design.
-- `.achievements-page`, `.pb-card`, `.medal-summary` and `.medal-tally` are all redefined at mobile widths inside `achievements.css` (lines 941, 1059, 1111, 1125, and again at 1300, 1316, 1346), which loads afterwards and already wins.
-
-Deleting them also removes a nested `@media (max-width: 1000px)` sitting *inside* the `600px` block, whose outer condition made the inner one unreachable above 600px.
-
-Expected after this second cut: the selector `grep` prints nothing, braces balance, and 227 lines total have left `style.css`.
-
+Expected: `style.css` goes from 1722 to 1680 lines, braces balance at 170/170.
 - [ ] **Step 7: Verify achievements still renders identically**
 
 Reload `http://localhost:8000/achievements.html`.
