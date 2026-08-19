@@ -201,3 +201,36 @@ if(aboutStage){
     }
 
 }
+
+
+/* ==========================================
+   HERO SCROLL CUE
+
+   Dismiss it the moment the reader shows they have understood.
+========================================== */
+
+const scrollCue = document.querySelector(".scroll-cue");
+
+if(scrollCue){
+
+    let cueHidden = false;
+
+    function hideCue(){
+
+        if(cueHidden) return;
+
+        if(window.scrollY < 60) return;
+
+        cueHidden = true;
+
+        scrollCue.classList.add("is-hidden");
+
+        window.removeEventListener("scroll", hideCue);
+
+    }
+
+    window.addEventListener("scroll", hideCue, { passive:true });
+
+    hideCue();
+
+}

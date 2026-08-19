@@ -64,7 +64,8 @@ if (featuredWrapper && featuredTrack) {
 
                 card.scrollIntoView({
                     behavior:"smooth",
-                    block:"center"
+                    inline:"center",
+                    block:"nearest"
                 });
 
             });
@@ -111,7 +112,7 @@ if (featuredWrapper && featuredTrack) {
 
             },
             {
-                root:null,
+                root:featuredWrapper,
                 threshold:.6
             }
         );
@@ -194,13 +195,21 @@ if (featuredWrapper && featuredTrack) {
            DESKTOP WHEEL
         ------------------------------------------ */
 
+        /* Only a genuine SIDEWAYS gesture drives the track. Vertical
+           wheel must fall through to the page: this used to
+           preventDefault() every wheel event over a full-viewport
+           section, which trapped the reader -- there was no way to
+           scroll past Featured to the sections below it. */
+
         featuredTrack.addEventListener(
             "wheel",
             e => {
 
+                if (Math.abs(e.deltaX) <= Math.abs(e.deltaY)) return;
+
                 e.preventDefault();
 
-                velocity += e.deltaY * 0.02;
+                velocity += e.deltaX * 0.02;
 
             },
             { passive:false }

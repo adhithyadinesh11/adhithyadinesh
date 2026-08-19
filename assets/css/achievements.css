@@ -5,7 +5,9 @@
 .achievements-page{
     width:min(1400px,92%);
     margin:0 auto;
-    padding:120px 0 150px;
+    /* Trimmed from 120/150 so the whole section fits about one screen.
+       The content itself is only ~800px; the rest was padding. */
+    padding:clamp(66px,7.4vh,80px) 0 clamp(20px,2.6vh,32px);
     position:relative;
     z-index:2;
 
@@ -108,7 +110,7 @@
 
 .achievements-hero{
 
-    margin-bottom:30px;
+    margin-bottom:14px;
 
     text-align:center;
 
@@ -162,7 +164,7 @@
 
     border-top:1px solid rgba(255,255,255,.10);
 
-    margin:25px 0;
+    margin:13px 0;
 
 }
 
@@ -592,6 +594,25 @@
 
     width:100%;
 
+    /* Capped so the section height stays stable no matter how many
+       competitions a given year holds -- otherwise a busy year pushes
+       the section well past one screen. Scrolls internally instead. */
+
+    max-height:clamp(150px,26vh,260px);
+
+    overflow-y:auto;
+
+    scrollbar-width:thin;
+
+}
+
+
+#results-container::-webkit-scrollbar{
+    width:3px;
+}
+
+#results-container::-webkit-scrollbar-thumb{
+    background:rgba(255,255,255,.18);
 }
 
 .competition-item{
@@ -947,7 +968,7 @@
 
         width:90%;
 
-        padding:82px 0 45px;
+        padding:60px 0 12px;
 
     }
 
@@ -1237,7 +1258,7 @@
 
         width:92%;
 
-        padding-top:82px;
+        padding-top:64px;
 
     }
 
@@ -1335,7 +1356,7 @@
 
     align-items:center;
 
-    margin:28px 0 0;
+    margin:14px 0 0;
 
 }
 
