@@ -87,10 +87,15 @@ const gallery = read("assets/js/gallery.js");
 const videos  = read("assets/js/race.js") + read("assets/js/swim.js");
 const feat    = read("featured.html");
 
+/* The Google Fonts links in <head> are hrefs too. Without this filter
+   the count comes out at 17 rather than the 14 article cards. */
+const FONT_HOST = /fonts\.(googleapis|gstatic)\.com/;
+
 fs.writeFileSync("tools/expected.json", JSON.stringify({
   galleryOrder: [...gallery.matchAll(/image:\s*"([^"]+)"/g)].map(m => m[1]),
   videoUrls:    uniq([...videos.matchAll(/(https:\/\/pub-[^"]+\.mp4)/g)].map(m => m[1])),
-  articleUrls:  uniq([...feat.matchAll(/href="(https?:\/\/[^"]+)"/g)].map(m => m[1])),
+  articleUrls:  uniq([...feat.matchAll(/href="(https?:\/\/[^"]+)"/g)]
+                     .map(m => m[1]).filter(u => !FONT_HOST.test(u))),
   formKey:      "f6ff404a-3fa5-4e5f-9dfb-1f62fca7d62b",
   formFields:   ["access_key","subject","from_name","botcheck","name","email","message","redirect"],
   deletedPages: ["about.html","achievements.html","featured.html","contact.html",

@@ -1,0 +1,64 @@
+{
+  "galleryOrder": [
+    "1.jpg",
+    "17.jpg",
+    "16.jpg",
+    "15.jpg",
+    "14.jpg",
+    "13.jpg",
+    "12.jpg",
+    "11.jpg",
+    "10.jpg",
+    "9.jpg",
+    "8.jpg",
+    "7.jpg",
+    "6.jpg",
+    "5.jpg",
+    "3.jpg",
+    "2.jpg"
+  ],
+  "videoUrls": [
+    "https://pub-214e94a3a6cb4f28be70b88cfa1b2d80.r2.dev/race1-web.mp4",
+    "https://pub-214e94a3a6cb4f28be70b88cfa1b2d80.r2.dev/race2-web.mp4",
+    "https://pub-214e94a3a6cb4f28be70b88cfa1b2d80.r2.dev/race3-web.mp4",
+    "https://pub-214e94a3a6cb4f28be70b88cfa1b2d80.r2.dev/race4-web.mp4",
+    "https://pub-214e94a3a6cb4f28be70b88cfa1b2d80.r2.dev/swim1-web.mp4",
+    "https://pub-214e94a3a6cb4f28be70b88cfa1b2d80.r2.dev/swim2-web.mp4"
+  ],
+  "articleUrls": [
+    "https://www.thehindu.com/news/cities/chennai/foot-overbridge-opened/article30738019.ece",
+    "https://x.com/adh1thyad1neshh/status/1636954834132963328?s=20",
+    "https://www.newindianexpress.com/sport/other/2019/Jun/03/adhitya-raises-bar-in-aquatic-meet-1985310.html",
+    "https://www.newindianexpress.com/cities/chennai/2016/Nov/16/a-swimmers-thirst-for-winning-gold-1539347.html",
+    "https://www.newindianexpress.com/cities/chennai/2018/Jun/20/the-winning-stroke-1831060.html",
+    "https://www.thehindu.com/sport/other-sports/turtles-clinches-overall-title/article6117111.ece",
+    "https://www.newindianexpress.com/cities/chennai/2019/Nov/16/teen-medallist-juggles-engineering-with-podium-dream-2062284.html",
+    "https://youtu.be/pI6N-Zv6t8Y?si=XZf-Y_0icMKpt0FQ",
+    "https://swimswam.com/karnataka-claims-overall-sub-junior-junior-national-title-in-india/",
+    "https://timesofindia.indiatimes.com/city/chennai/topper-in-sports-quota-takes-aim-at-2024-olympics/articleshow/69981625.cms",
+    "https://www.dtnext.in/news/sports/senior-national-aquatic-tamil-nadu-break-mens-4-x-100m-medley-record-803582",
+    "https://www.newindianexpress.com/sport/2016/Jun/04/adhithya-lone-record-breaker-as-tamil-nadu-junior-swimming-kicks-off-936468.html",
+    "https://www.newindianexpress.com/cities/chennai/2022/May/05/strokes-of-success-spinal-cord-injury-notwithstanding-2449771.html",
+    "https://www.thehindu.com/sport/other-sports/Adhithya-sets-a-record/article14384648.ece"
+  ],
+  "formKey": "f6ff404a-3fa5-4e5f-9dfb-1f62fca7d62b",
+  "formFields": [
+    "access_key",
+    "subject",
+    "from_name",
+    "botcheck",
+    "name",
+    "email",
+    "message",
+    "redirect"
+  ],
+  "deletedPages": [
+    "about.html",
+    "achievements.html",
+    "featured.html",
+    "contact.html",
+    "watch.html",
+    "swim.html",
+    "race.html"
+  ]
+}
