@@ -179,9 +179,16 @@ gallery.forEach(photo => {
 
     card.className = photo.featured ? "featured-photo" : "gallery-item";
 
+    /* The grid shows a 640px thumbnail; the lightbox swaps in the full
+       2000px file on demand. Loading full-size files into 120-400px
+       tiles meant the archive decoded ~190MB of bitmap at once. */
+
     card.innerHTML = `
-        <img src="assets/images/gallery/${photo.image}" alt="${photo.title}">
+        <img src="assets/images/gallery/thumb/${photo.image}"
+             alt="${photo.title}" loading="lazy" decoding="async">
     `;
+
+    card.dataset.full = "assets/images/gallery/" + photo.image;
 
     card.dataset.title = photo.title;
 
@@ -241,7 +248,9 @@ function showImage(){
 
     const img = card.querySelector("img");
 
-    lightboxImage.src = img.src;
+    /* Full-resolution file for the lightbox, thumbnail in the grid. */
+
+    lightboxImage.src = card.dataset.full || img.src;
 
     lightboxTitle.textContent = card.dataset.title;
 
