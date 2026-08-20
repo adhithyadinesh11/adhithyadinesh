@@ -551,6 +551,11 @@ section[id]{
 }
 
 
+/* No aspect-ratio here. The grid row height governs; an aspect-ratio
+   would win over it and, at a ~414px column width, stretched each tile
+   to 414px tall -- overflowing the 180px row and spilling the bottom
+   row of photos down into the contact section. */
+
 .gallery-panel-item{
 
     position:relative;
@@ -559,7 +564,7 @@ section[id]{
 
     display:block;
 
-    aspect-ratio:1 / 1;
+    height:100%;
 
     background:#0b0b0b;
 }
@@ -569,8 +574,6 @@ section[id]{
 
     grid-column:span 2;
     grid-row:span 2;
-
-    aspect-ratio:auto;
 }
 
 
