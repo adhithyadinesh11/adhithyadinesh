@@ -1,5 +1,2 @@
-# Full-resolution source photos. Kept locally as working masters.
-# Note: the pre-resize versions are also permanently recoverable from git
-# history, e.g.
-#   git show 0aab85f:assets/images/gallery/1.jpg > 1-original.jpg
-originals/
+# Nothing ignored. originals/ is tracked deliberately as the backup of
+# the full-resolution photos -- see originals/README.md
