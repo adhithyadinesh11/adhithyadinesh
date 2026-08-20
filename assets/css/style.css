@@ -58,12 +58,15 @@ body{
     position:relative;
     width:100%;
 
-    /* Must agree with .about-panel, which is sized from innerHeight via
-       --vh-cached. When the two units disagree by even a pixel the hero
-       falls short and the About backdrop peeks in below it. */
+    /* svh, not dvh. dvh is dynamic: it grows when the mobile URL bar
+       hides, which made every full-height section on the page taller
+       mid-scroll. The document grew 406px, the browser re-anchored the
+       scroll, and it looked like the page sprang back halfway. svh is
+       the constant small-viewport unit, so nothing resizes while
+       scrolling. */
 
     height:100vh;
-    height:100dvh;
+    height:100svh;
 
     overflow:hidden;
 }
@@ -949,7 +952,7 @@ body{
 
         width:100%;
 
-        height:100dvh;
+        height:100svh;
 
         transform:none;
 
@@ -1133,9 +1136,9 @@ body{
 
         width:100%;
 
-        height:100dvh;
+        height:100svh;
 
-        min-height:100dvh;
+        min-height:100svh;
 
         overflow:hidden;
 
@@ -1311,9 +1314,9 @@ body{
 
         width:100% !important;
 
-        height:100dvh !important;
+        height:100svh !important;
 
-        min-height:100dvh !important;
+        min-height:100svh !important;
 
         overflow:hidden !important;
 
@@ -1428,7 +1431,7 @@ body{
 
         height:auto !important;
 
-        min-height:100dvh !important;
+        min-height:100svh !important;
 
         overflow-x:hidden !important;
 
@@ -1441,7 +1444,7 @@ body{
 
         height:auto !important;
 
-        min-height:100dvh !important;
+        min-height:100svh !important;
 
         display:block !important;
 

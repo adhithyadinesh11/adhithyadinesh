@@ -75,7 +75,7 @@ section[id]{
     justify-content:center;
 
     min-height:100vh;
-    min-height:100dvh;
+    min-height:100svh;
 
     padding:12vh 8vw;
 
@@ -138,7 +138,7 @@ section[id]{
     justify-content:center;
 
     height:100vh;
-    height:var(--vh-cached, 100dvh);
+    height:var(--vh-cached, 100svh);
 
     padding:12vh 10vw;
 }
@@ -935,7 +935,7 @@ section[id]{
     justify-content:center;
 
     min-height:100vh;
-    min-height:100dvh;
+    min-height:100svh;
 }
 
 

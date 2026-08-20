@@ -235,7 +235,7 @@ body.featured-page{
 
         height:auto !important;
 
-        min-height:100dvh !important;
+        min-height:100svh !important;
 
         overflow-x:hidden !important;
 
@@ -248,7 +248,7 @@ body.featured-page{
 
         height:auto !important;
 
-        min-height:100dvh !important;
+        min-height:100svh !important;
 
         display:block !important;
 
