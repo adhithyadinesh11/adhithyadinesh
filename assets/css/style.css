@@ -36,7 +36,15 @@ body{
 .hero{
     position:relative;
     width:100%;
+
+    /* Must agree with .about-panel, which is sized from innerHeight via
+       --vh-cached. When the two units disagree by even a pixel the hero
+       falls short and the About backdrop peeks in below it. */
+
     height:100vh;
+    height:100dvh;
+
+    overflow:hidden;
 }
 
 .hero img{

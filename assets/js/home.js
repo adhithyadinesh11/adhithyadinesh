@@ -169,9 +169,28 @@ if(aboutStage){
 
         skipped = true;
 
+        /* Where the section starts, measured BEFORE the track collapses. */
+
+        const stageTop = aboutStage.getBoundingClientRect().top + window.scrollY;
+
         aboutStage.classList.add("is-skipped");
 
         window.removeEventListener("scroll", onScroll);
+
+        /* Collapsing the track removes several thousand pixels from the
+           document. The browser keeps the old scrollY, which now points
+           far past About -- readers landed in Featured, or at the very
+           bottom of the page. Put them at the top of the story instead. */
+
+        const previous = document.documentElement.style.scrollBehavior;
+
+        document.documentElement.style.scrollBehavior = "auto";
+
+        window.scrollTo({ top: stageTop, behavior: "instant" });
+
+        requestAnimationFrame(() => {
+            document.documentElement.style.scrollBehavior = previous;
+        });
 
     }
 
@@ -233,4 +252,22 @@ if(scrollCue){
 
     hideCue();
 
+}
+
+
+/* ==========================================
+   START AT THE TOP
+
+   The About track is several screens tall, so the browser's default
+   scroll restoration can drop a reloading visitor into the middle of
+   it -- which looks like the hero is broken and showing the About
+   image. Always begin at the top unless a real anchor was requested.
+========================================== */
+
+if("scrollRestoration" in history){
+    history.scrollRestoration = "manual";
+}
+
+if(!window.location.hash){
+    window.scrollTo(0, 0);
 }

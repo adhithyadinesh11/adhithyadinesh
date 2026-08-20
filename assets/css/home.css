@@ -29,12 +29,13 @@
    Sections must clear the fixed navbar when jumped to.
 ========================================== */
 
-section[id]{
-    scroll-margin-top:96px;
-}
+/* Zero, not 96px. A positive scroll-margin leaves that many pixels of
+   the PREVIOUS section on screen after an anchor jump, which reads as a
+   mis-landing. The navbar floats over content by design, and every
+   section carries enough top padding to clear it. */
 
-@media(max-width:700px){
-    section[id]{ scroll-margin-top:80px; }
+section[id]{
+    scroll-margin-top:0;
 }
 
 
@@ -390,12 +391,15 @@ section[id]{
 
     position:static;
 
+    /* height:auto, and NO min-height. The full text now lives inside
+       this panel, so a min-height would pad blank space under short
+       copy for no reason. */
+
     height:auto;
 
-    min-height:100vh;
-    min-height:100dvh;
-
     align-items:flex-start;
+
+    padding:clamp(72px,9vh,110px) 10vw clamp(56px,7vh,90px);
 }
 
 
@@ -417,6 +421,14 @@ section[id]{
     width:min(900px,100%);
 
     margin:0 auto;
+}
+
+
+/* The backdrop is absolute inside the panel, so once the panel is
+   static and auto-height it still covers exactly the text behind it. */
+
+.about-stage.is-skipped .about-backdrop{
+    inset:0;
 }
 
 
@@ -898,4 +910,31 @@ section[id]{
     line-height:1.55;
 
     color:rgba(244,241,232,.32);
+}
+
+
+/* ==========================================
+   ACHIEVEMENTS — ONE ALIGNED PANEL
+
+   The section is sized to one screen, so centre its content rather than
+   letting it sit against the top edge.
+========================================== */
+
+#achievements{
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    min-height:100vh;
+    min-height:100dvh;
+}
+
+
+#achievements .achievements-page{
+
+    /* The flex parent handles vertical placement now. */
+
+    padding-top:clamp(56px,6vh,72px);
+    padding-bottom:clamp(16px,2vh,28px);
 }
