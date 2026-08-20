@@ -1386,7 +1386,12 @@ body{
 
         font-family:var(--syne) !important;
 
-        font-size:clamp(2.4rem,11.5vw,4rem) !important;
+        /* Measured: "ADHITHYA" needs <= 10.4vw to fit the 58vw the hero
+           text box gets (left:35vw + right:7vw). At 11.5vw it overflowed
+           by 22-28px at every phone width, and .hero{overflow:hidden}
+           was clipping the end of his name. */
+
+        font-size:clamp(1.8rem,10vw,4rem) !important;
 
         font-weight:700 !important;
 
