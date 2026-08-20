@@ -933,134 +933,26 @@ section[id]{
 
 #achievements .achievements-page{
 
-    /* The flex parent handles vertical placement now. */
+    /* The flex parent handles vertical placement now. style.css:457
+       gives this min-height:100vh, which made it stretch to fill the
+       section so there was nothing left to centre. */
+
+    min-height:0;
 
     padding-top:clamp(56px,6vh,72px);
     padding-bottom:clamp(16px,2vh,28px);
 }
 
 
-/* ==========================================
-   ACHIEVEMENTS — PERSONAL BESTS + MEDALS BAND
+/* This divider is redundant: .medal-summary already carries its own
+   border-top from style.css:600, so the two drew parallel lines. It also
+   had margin:-30px 0 to tuck against the tall old personal-best cards,
+   and once those became content-height it landed on top of the meet
+   names. Drop it and let the medal summary's own rule separate them. */
 
-   Side by side rather than stacked. As two rows they cost roughly 220px
-   of vertical space, which is what pushed the section past one screen on
-   a normal browser window once tabs and a bookmarks bar are accounted
-   for.
-========================================== */
+#achievements .pbs + .divider{
 
-.ach-band{
-
-    display:grid;
-
-    grid-template-columns:minmax(0,1.62fr) minmax(0,1fr);
-
-    gap:clamp(26px,3.4vw,60px);
-
-    align-items:center;
-}
-
-
-.ach-band .pbs,
-.ach-band .medal-summary{
-    margin:0;
-}
-
-
-/* A hairline instead of a full-width divider between them. */
-
-.ach-band .medal-summary{
-
-    /* style.css:595 gives this a border-top and border-bottom, which
-       framed it nicely as a full-width stacked band. Beside the personal
-       bests those two plus the vertical rule below draw three sides of a
-       box, so drop them and keep only the divider. */
-
-    border-top:0;
-    border-bottom:0;
-
-    border-left:1px solid rgba(255,255,255,.10);
-
-    padding-top:0;
-    padding-bottom:0;
-
-    padding-left:clamp(24px,3vw,54px);
-}
-
-
-/* .pb-list uses fixed 220px columns with 70px gaps -- 1090px in total,
-   far wider than this column, so it overflowed off both edges. Flexible
-   tracks with a proportional gap instead. */
-
-.ach-band .pb-list{
-
-    grid-template-columns:repeat(4,minmax(0,1fr));
-
-    gap:clamp(8px,1.4vw,24px);
-}
-
-
-/* style.css gives .pb-time margin:50px 0 1px with transform
-   translateY(-45px), and achievements.css adds margin-bottom:-30px on
-   top. Those three numbers are calibrated against each other: changing
-   the top margin alone slides the event label up into the time and they
-   collide. Neutralise the whole arrangement here rather than re-tuning
-   it, which also reclaims ~45px of dead head-room. */
-
-/* style.css:505 sets min-height:230px on .pb-card, sized for the old
-   full-width stacked layout. Inside the band it left ~110px of empty
-   space under the text, which is what made the section look padded out
-   in the middle. Let the cards size to their content. */
-
-.ach-band .pb-card{
-
-    min-height:0;
-
-    /* Top-aligned, not centred. The meet names wrap to different line
-       counts, so centring each card left the times sitting at different
-       heights across the row. */
-
-    justify-content:flex-start;
-}
-
-
-.ach-band .pb-time{
-
-    margin:0 0 4px;
-
-    transform:none;
-}
-
-.ach-band .pb-time:hover{
-    transform:scale(1.06);
-}
-
-
-/* 80px between three medals is a lot inside half a row. */
-
-.ach-band .medal-tally{
-    gap:clamp(18px,3vw,52px);
-}
-
-
-@media(max-width:900px){
-
-    .ach-band{
-
-        grid-template-columns:1fr;
-
-        gap:20px;
-    }
-
-    .ach-band .medal-summary{
-
-        border-left:0;
-        padding-left:0;
-
-        border-top:1px solid rgba(255,255,255,.10);
-        padding-top:18px;
-    }
-
+    display:none;
 }
 
 
@@ -1090,22 +982,8 @@ section[id]{
         font-size:1.6rem;
     }
 
-    .ach-band{
-        gap:12px;
-    }
 
-    /* achievements.css:1030 sets margin-bottom:-12px !important on
-       .pb-time for mobile, which was tuned against a translateY this
-       band removes. Left alone it drags the event label up into the
-       time -- all four overlapped. !important is the only way past it. */
 
-    .ach-band .pb-time{
-        margin-bottom:6px !important;
-    }
-
-    .ach-band .medal-summary{
-        padding-top:12px;
-    }
 
     .quick-summary-trigger{
         margin:8px 0 0;
@@ -1141,10 +1019,6 @@ section[id]{
         font-size:1.5rem;
     }
 
-    .ach-band .pb-time{
-        font-size:1.6rem;
-        margin-top:10px;
-    }
 
     .pb-meet{
         font-size:.6rem;
@@ -1160,8 +1034,263 @@ section[id]{
     }
 
     #achievements .achievements-page{
-        padding-top:24px;
-        padding-bottom:2px;
+        padding-top:16px;
+        padding-bottom:0;
     }
 
+}
+
+
+/* ==========================================
+   RESULTS AS THREE COLUMNS
+
+   Category, year and competition were three stacked rows, which is where
+   most of the section's height went. Side by side they read as a
+   picker -- pick a category, pick a year, see the meets -- and the block
+   is only as tall as its tallest column.
+
+   Grid areas, so the markup and the JS that fills .year-selector and
+   #results-container are untouched.
+========================================== */
+
+@media(min-width:701px){
+
+    .results{
+
+        display:grid;
+
+        grid-template-columns:
+            minmax(140px,auto)
+            minmax(76px,auto)
+            minmax(0,1fr);
+
+        grid-template-areas:
+            "title title title"
+            "cats  years games";
+
+        column-gap:clamp(20px,2.6vw,46px);
+        row-gap:16px;
+
+        align-items:start;
+
+        text-align:left;
+    }
+
+
+    .results .section-title{
+
+        grid-area:title;
+
+        margin-bottom:0;
+
+        text-align:left;
+    }
+
+
+    /* ---- column 1: category ---- */
+
+    .result-tabs{
+
+        grid-area:cats;
+
+        flex-direction:column;
+        align-items:flex-start;
+        justify-content:flex-start;
+
+        gap:12px;
+
+        margin:0;
+
+        padding-right:clamp(16px,1.8vw,30px);
+
+        border-right:1px solid rgba(255,255,255,.10);
+    }
+
+
+    /* ---- column 2: year ---- */
+
+    .year-selector{
+
+        grid-area:years;
+
+        flex-direction:column;
+        align-items:flex-start;
+        justify-content:flex-start;
+
+        flex-wrap:nowrap;
+
+        gap:10px;
+
+        margin:0;
+
+        /* was a full-width underline beneath a horizontal row */
+
+        padding:0 clamp(16px,1.8vw,30px) 0 0;
+
+        border-bottom:0;
+
+        border-right:1px solid rgba(255,255,255,.10);
+
+        /* NATIONAL carries 16 years. Stacked in a column that is ~450px,
+           which would push the section well past one screen depending on
+           which tab is open. Cap it and scroll inside, so the section
+           height no longer depends on the active category. */
+
+        max-height:clamp(104px,17vh,200px);
+
+        overflow-y:auto;
+
+        scrollbar-width:thin;
+    }
+
+
+    .year-selector::-webkit-scrollbar{
+        width:3px;
+    }
+
+    .year-selector::-webkit-scrollbar-thumb{
+        background:rgba(255,255,255,.18);
+    }
+
+
+    /* ---- column 3: the meets ---- */
+
+    #results-container{
+
+        grid-area:games;
+
+        max-height:clamp(150px,24vh,240px);
+
+        overflow-y:auto;
+    }
+
+
+    .competition-item{
+
+        justify-content:flex-start;
+
+        text-align:left;
+
+        padding:10px 44px 10px 0;
+    }
+
+
+    .competition-item:first-child{
+        padding-top:0;
+    }
+
+
+    /* .competition-left centres its own text, which left the location
+       line floating away from the title above it. */
+
+    .competition-left,
+    .competition-left h3,
+    .competition-left p{
+        text-align:left;
+    }
+
+}
+
+
+/* ==========================================
+   PERSONAL BEST CARDS
+
+   style.css:505 sets min-height:230px, sized for the original layout,
+   which leaves ~80px of empty space under the text.
+
+   .pb-time also carries three interlocking values across two files:
+   margin:50px 0 1px with transform translateY(-45px) from style.css, and
+   margin-bottom:-30px from achievements.css. They are calibrated against
+   each other -- changing any one alone slides the event label into the
+   time. Neutralised together rather than re-tuned.
+========================================== */
+
+#achievements .pb-card{
+
+    min-height:0;
+
+    /* Top-aligned so the times share a baseline across the row even
+       though the meet names wrap to different line counts. */
+
+    justify-content:flex-start;
+}
+
+
+#achievements .pb-time{
+
+    margin:0 0 6px;
+
+    transform:none;
+}
+
+#achievements .pb-time:hover{
+    transform:scale(1.06);
+}
+
+
+@media(max-width:700px){
+
+    /* achievements.css:1030 sets margin-bottom:-12px !important here,
+       tuned against the translate removed above. */
+
+    #achievements .pb-time{
+        margin-bottom:6px !important;
+    }
+
+    /* style.css:598 gives .medal-summary padding:42px 0, which is a lot
+       of breathing room to spend on a phone. */
+
+    #achievements .medal-summary{
+        padding:10px 0;
+    }
+
+    #achievements .pb-list{
+        gap:14px 18px;
+    }
+
+    /* 16 wrapped years is three rows on a narrow phone. */
+
+    #achievements .year-selector{
+        max-height:58px;
+        overflow-y:auto;
+    }
+
+}
+
+
+/* ==========================================
+   RESULTS — EMPTY CATEGORY
+
+   The STATE category exists in the results data but holds no entries
+   (international: 3 years / 3 meets, national: 16 / 30, state: 0 / 0).
+   Without this the tab renders as two blank columns and a stray divider,
+   which reads as broken rather than empty. CSS only, so it disappears by
+   itself the moment entries are added.
+========================================== */
+
+#results-container:empty::after{
+
+    content:"No results listed for this category yet.";
+
+    display:block;
+
+    padding:2px 0;
+
+    font-family:"DM Mono",monospace;
+
+    font-size:.7rem;
+
+    letter-spacing:.04em;
+
+    color:rgba(244,241,232,.34);
+}
+
+
+/* No years means no column, so drop its rule too. */
+
+.year-selector:empty{
+
+    border-right:0;
+
+    padding-right:0;
 }
