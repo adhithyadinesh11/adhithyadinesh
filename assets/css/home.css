@@ -1074,6 +1074,16 @@ section[id]{
         align-items:start;
 
         text-align:left;
+
+        /* The three columns form a centred group, so the block sits
+           under the centred rows above instead of flush to the left
+           edge. Text inside each column stays left-aligned. */
+
+        justify-content:center;
+
+        max-width:1080px;
+
+        margin:0 auto;
     }
 
 
@@ -1297,27 +1307,21 @@ section[id]{
 
 
 /* ==========================================
-   ACHIEVEMENTS — ONE GRID, ONE LEFT EDGE
+   ACHIEVEMENTS — CENTRED HEADER ROWS
 
-   The section was running three alignment systems at once: the personal
-   bests were a centred cluster of fixed 220px cards starting at x=117,
-   the medals a 75px island at x=470 in a 1325px container, and the
-   results a left-aligned grid at x=0. Nothing shared an edge, which is
-   what made it read as unfinished.
-
-   Now everything hangs off the same left edge, and the medals sit on the
-   same four-column grid as the personal bests so each one lines up under
-   a time.
+   Title, personal bests and medals stay centred. Each row spans the
+   full width on an even grid so the columns are symmetric, rather than
+   the old fixed-220px cluster that sat off to one side of the container.
 ========================================== */
 
 @media(min-width:701px){
 
-    #achievements .achievements-page,
     #achievements .achievements-hero,
     #achievements .achievements-hero h1,
     #achievements .section-title,
-    #achievements .medal-summary{
-        text-align:left;
+    #achievements .medal-summary,
+    #achievements .quick-summary-trigger{
+        text-align:center;
     }
 
 
@@ -1326,11 +1330,10 @@ section[id]{
     }
 
 
-    /* The shared grid. Four columns; the three medals take the first
-       three, so a medal always sits under a personal best. */
+    /* Personal bests: four even columns across the full width, contents
+       centred in each. */
 
-    #achievements .pb-list,
-    #achievements .medal-tally{
+    #achievements .pb-list{
 
         display:grid;
 
@@ -1344,27 +1347,39 @@ section[id]{
     }
 
 
-    #achievements .pb-card,
-    #achievements .medal-item{
+    #achievements .pb-card{
 
-        align-items:flex-start;
+        align-items:center;
 
-        text-align:left;
+        text-align:center;
 
         width:100%;
     }
 
 
-    #achievements .pb-event,
-    #achievements .pb-meet,
-    #achievements .medal-label,
-    #achievements .achievement-medal-count{
-        text-align:left;
+    /* Medals: three even columns, so the row is symmetric about the
+       centre rather than aligning to the personal-best columns. */
+
+    #achievements .medal-tally{
+
+        display:grid;
+
+        grid-template-columns:repeat(3,minmax(0,1fr));
+
+        gap:clamp(14px,2.2vw,34px);
+
+        align-items:start;
+
+        /* Three items across the full 1325px flung them to the edges.
+           Constrained and centred they read as one group, while still
+           being far better distributed than the original 310px cluster
+           that sat as an island in the middle of the container. */
+
+        max-width:min(780px,100%);
+
+        margin:0 auto;
     }
 
-
-    /* Tighter, and the border-top is now the only separator between the
-       two rows since the old divider was redundant. */
 
     #achievements .medal-summary{
 
@@ -1374,29 +1389,16 @@ section[id]{
     }
 
 
-    /* Title and the quick-summary link share the top row. */
+    #achievements .quick-summary-trigger{
 
-    #achievements .achievements-hero{
+        justify-content:center;
 
-        display:flex;
-        align-items:baseline;
-        justify-content:space-between;
-
-        gap:24px;
-
-        margin-bottom:10px;
+        margin:12px 0 0;
     }
 
 
-    #achievements .quick-summary-trigger{
-
-        justify-content:flex-end;
-
-        margin:0;
-
-        width:auto;
-
-        flex:0 0 auto;
+    #achievements .achievements-hero{
+        margin-bottom:10px;
     }
 
 }
@@ -1427,8 +1429,18 @@ section[id]{
         column-gap:10px;
         row-gap:2px;
 
-        justify-content:start;
+        /* centred within its column, and the label centred under the
+           emoji+count pair rather than hugging the left */
+
+        justify-content:center;
         align-items:center;
+
+        text-align:center;
+    }
+
+
+    #achievements .medal-label{
+        text-align:center;
     }
 
 
