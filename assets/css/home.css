@@ -1439,3 +1439,74 @@ section[id]{
 #achievements .achievement-medal-count{
     font-variant-numeric:tabular-nums;
 }
+
+
+/* ==========================================
+   FEATURED — MOBILE HEADING + CONSISTENT LINK
+
+   The heading was centred on phones; left-aligned it sits over the
+   carousel it belongs to.
+
+   The read link was in normal flow after the blurb, so its height moved
+   with the length of the text -- on a swipe carousel it appeared in a
+   different place on every card, which reads as missing on the ones
+   where it sits high. Pushed to the bottom of the card instead, so it is
+   always in the same spot.
+========================================== */
+
+@media(max-width:700px){
+
+    .featured-page .featured-hero{
+
+        text-align:left !important;
+
+        padding-left:9vw !important;
+        padding-right:9vw !important;
+
+        /* Clears the fixed hamburger, which occupies y 22-64 at the top
+           left. Centred the heading dodged it; left-aligned it does not. */
+
+        padding-top:78px !important;
+    }
+
+    .featured-page .featured-hero h1,
+    .featured-page .featured-hero p{
+        text-align:left !important;
+        margin-left:0 !important;
+        margin-right:0 !important;
+    }
+
+}
+
+
+/* featured.css:137 gives .article-content a FIXED height:280px. It is
+   already a flex column, so the link could have been pinned all along --
+   but a fixed height means the longest blurbs overflow it and push the
+   link out past the bottom of the card. Card 11 (DT NEXT) is the worst.
+   min-height lets those cards grow; the flex chain then makes every card
+   in the row the same height, so margin-top:auto lands every link on the
+   same line. */
+
+.featured-page .article-card{
+
+    display:flex;
+    flex-direction:column;
+
+    align-self:stretch;
+}
+
+.featured-page .article-content{
+
+    height:auto;
+
+    min-height:280px;
+
+    flex:1;
+}
+
+.featured-page .article-content .read-link{
+
+    margin-top:auto;
+
+    padding-top:14px;
+}
