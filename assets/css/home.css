@@ -1294,3 +1294,192 @@ section[id]{
 
     padding-right:0;
 }
+
+
+/* ==========================================
+   ACHIEVEMENTS — ONE GRID, ONE LEFT EDGE
+
+   The section was running three alignment systems at once: the personal
+   bests were a centred cluster of fixed 220px cards starting at x=117,
+   the medals a 75px island at x=470 in a 1325px container, and the
+   results a left-aligned grid at x=0. Nothing shared an edge, which is
+   what made it read as unfinished.
+
+   Now everything hangs off the same left edge, and the medals sit on the
+   same four-column grid as the personal bests so each one lines up under
+   a time.
+========================================== */
+
+@media(min-width:701px){
+
+    #achievements .achievements-page,
+    #achievements .achievements-hero,
+    #achievements .achievements-hero h1,
+    #achievements .section-title,
+    #achievements .medal-summary{
+        text-align:left;
+    }
+
+
+    #achievements .section-title{
+        margin:0 0 14px;
+    }
+
+
+    /* The shared grid. Four columns; the three medals take the first
+       three, so a medal always sits under a personal best. */
+
+    #achievements .pb-list,
+    #achievements .medal-tally{
+
+        display:grid;
+
+        grid-template-columns:repeat(4,minmax(0,1fr));
+
+        gap:clamp(14px,2.2vw,34px);
+
+        justify-content:stretch;
+
+        align-items:start;
+    }
+
+
+    #achievements .pb-card,
+    #achievements .medal-item{
+
+        align-items:flex-start;
+
+        text-align:left;
+
+        width:100%;
+    }
+
+
+    #achievements .pb-event,
+    #achievements .pb-meet,
+    #achievements .medal-label,
+    #achievements .achievement-medal-count{
+        text-align:left;
+    }
+
+
+    /* Tighter, and the border-top is now the only separator between the
+       two rows since the old divider was redundant. */
+
+    #achievements .medal-summary{
+
+        padding:16px 0 0;
+
+        border-bottom:0;
+    }
+
+
+    /* Title and the quick-summary link share the top row. */
+
+    #achievements .achievements-hero{
+
+        display:flex;
+        align-items:baseline;
+        justify-content:space-between;
+
+        gap:24px;
+
+        margin-bottom:10px;
+    }
+
+
+    #achievements .quick-summary-trigger{
+
+        justify-content:flex-end;
+
+        margin:0;
+
+        width:auto;
+
+        flex:0 0 auto;
+    }
+
+}
+
+
+/* ==========================================
+   MEDALS — SAME SHAPE AS A PERSONAL BEST
+
+   The count was stacked under the emoji over three lines at label size,
+   so a row that carries 100+ medals read as an afterthought beside the
+   personal bests. Emoji and count now share a line at display size with
+   the label beneath, which is the same shape as "24.59 / 50M BUTTERFLY"
+   directly above it, and costs one line less.
+========================================== */
+
+@media(min-width:701px){
+
+    #achievements .medal-item{
+
+        display:grid;
+
+        grid-template-columns:auto auto;
+
+        grid-template-areas:
+            "emoji count"
+            "label label";
+
+        column-gap:10px;
+        row-gap:2px;
+
+        justify-content:start;
+        align-items:center;
+    }
+
+
+    #achievements .medal-emoji{
+
+        grid-area:emoji;
+
+        font-size:clamp(1.1rem,1.5vw,1.5rem);
+
+        line-height:1;
+    }
+
+
+    #achievements .achievement-medal-count{
+
+        grid-area:count;
+
+        font-family:"IBM Plex Sans",sans-serif;
+
+        font-size:clamp(1.7rem,2.5vw,2.4rem);
+        font-weight:600;
+
+        line-height:1;
+
+        letter-spacing:-.03em;
+
+        color:#fff;
+    }
+
+
+    #achievements .medal-label{
+        grid-area:label;
+    }
+
+
+    /* ---- tighter throughout ---- */
+
+    #achievements .medal-summary{
+        padding-top:13px;
+    }
+
+    #achievements .divider{
+        margin:10px 0;
+    }
+
+    #achievements .results .section-title{
+        margin-bottom:10px;
+    }
+
+    #achievements .pb-meet{
+        margin-top:2px;
+    }
+
+}
