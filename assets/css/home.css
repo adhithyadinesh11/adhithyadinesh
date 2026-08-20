@@ -1420,7 +1420,10 @@ section[id]{
 
         display:grid;
 
-        grid-template-columns:auto auto;
+        /* Fixed first track, so the count always starts at the same
+           offset instead of wherever the emoji glyph happens to end. */
+
+        grid-template-columns:2.4em auto;
 
         grid-template-areas:
             "emoji count"
@@ -1444,9 +1447,22 @@ section[id]{
     }
 
 
+    /* Fixed box, glyph centred inside it. The three medal emoji do not
+       share metrics -- silver renders at a different height and mass to
+       gold and bronze -- so letting the glyph size its own cell shifted
+       each group by a few pixels. A fixed box makes all three
+       geometrically identical whatever the system font does. */
+
     #achievements .medal-emoji{
 
         grid-area:emoji;
+
+        display:inline-flex;
+        align-items:center;
+        justify-content:center;
+
+        width:1.55em;
+        height:1.55em;
 
         font-size:clamp(1.1rem,1.5vw,1.5rem);
 
@@ -1466,6 +1482,10 @@ section[id]{
         line-height:1;
 
         letter-spacing:-.03em;
+
+        /* Uniform digit widths, so 41 occupies exactly what 25 does. */
+
+        font-variant-numeric:tabular-nums;
 
         color:#fff;
     }

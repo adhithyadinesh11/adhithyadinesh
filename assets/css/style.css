@@ -1687,3 +1687,139 @@ body{
     }
 
 }
+
+/* ==========================================
+   NAV SWIMMER
+
+   The active-section marker: a swimmer who glides along under the nav to
+   whichever item you are on, and strokes while travelling. Lives here
+   rather than home.css so gallery.html gets it too.
+
+   Desktop only -- the nav collapses to a hamburger below 700px.
+========================================== */
+
+.navbar{
+    /* containing block for the swimmer */
+    padding-bottom:18px;
+}
+
+.nav-swimmer{
+
+    position:absolute;
+
+    left:0;
+    bottom:0;
+
+    display:block;
+
+    width:46px;
+    height:20px;
+
+    opacity:0;
+
+    pointer-events:none;
+
+    /* set by script.js */
+    transform:translateX(0);
+
+    transition:
+        transform .72s cubic-bezier(.55,.06,.3,1),
+        opacity .4s ease;
+}
+
+.nav-swimmer.is-visible{
+    opacity:1;
+}
+
+.nav-swimmer svg{
+    display:block;
+    overflow:visible;
+}
+
+.nav-swimmer path,
+.nav-swimmer circle{
+    fill:none;
+    stroke:rgba(255,255,255,.85);
+    stroke-width:1.15;
+    stroke-linecap:round;
+}
+
+.nav-swimmer .sw-head{
+    fill:rgba(255,255,255,.85);
+    stroke:none;
+}
+
+.nav-swimmer .sw-wake{
+    stroke:rgba(255,255,255,.28);
+    stroke-width:1;
+    stroke-dasharray:3 5;
+}
+
+
+/* ==========================================
+   STROKE — only while travelling
+========================================== */
+
+.nav-swimmer .sw-arm{
+    transform-origin:15px 9.8px;
+}
+
+.nav-swimmer .sw-legs{
+    transform-origin:28.5px 11px;
+}
+
+.nav-swimmer.is-swimming .sw-arm{
+    animation:swArm .46s linear infinite;
+}
+
+.nav-swimmer.is-swimming .sw-legs{
+    animation:swLegs .19s ease-in-out infinite alternate;
+}
+
+.nav-swimmer.is-swimming .sw-wake{
+    animation:swWake .46s linear infinite;
+}
+
+@keyframes swArm{
+    0%   { transform:rotate(0deg); }
+    50%  { transform:rotate(-168deg); }
+    100% { transform:rotate(-352deg); }
+}
+
+@keyframes swLegs{
+    from { transform:rotate(-7deg); }
+    to   { transform:rotate(7deg); }
+}
+
+@keyframes swWake{
+    from { stroke-dashoffset:0; }
+    to   { stroke-dashoffset:-16; }
+}
+
+
+@media(max-width:700px){
+
+    .navbar{
+        padding-bottom:0;
+    }
+
+    .nav-swimmer{
+        display:none;
+    }
+
+}
+
+
+@media(prefers-reduced-motion:reduce){
+
+    .nav-swimmer{
+        transition:none;
+    }
+
+    .nav-swimmer.is-swimming .sw-arm,
+    .nav-swimmer.is-swimming .sw-legs,
+    .nav-swimmer.is-swimming .sw-wake{
+        animation:none;
+    }
+
+}
