@@ -502,11 +502,11 @@ section[id]{
 
     font-family:"Syne",sans-serif;
 
-    font-size:clamp(1.5rem,3.6vw,2.9rem);
+    font-size:var(--h-section);
     font-weight:700;
 
-    line-height:1.05;
-    letter-spacing:-.02em;
+    line-height:1.06;
+    letter-spacing:var(--track-section);
 
     color:#f4f1e8;
 }
@@ -1360,24 +1360,18 @@ section[id]{
     /* Medals: three even columns, so the row is symmetric about the
        centre rather than aligning to the personal-best columns. */
 
+    /* The original centred row, restored: emoji stacked over the count
+       over the label, the three grouped in the middle. Only the 80px gap
+       is pulled in a little. */
+
     #achievements .medal-tally{
 
-        display:grid;
+        display:flex;
 
-        grid-template-columns:repeat(3,minmax(0,1fr));
+        justify-content:center;
+        align-items:flex-start;
 
-        gap:clamp(14px,2.2vw,34px);
-
-        align-items:start;
-
-        /* Three items across the full 1325px flung them to the edges.
-           Constrained and centred they read as one group, while still
-           being far better distributed than the original 310px cluster
-           that sat as an island in the middle of the container. */
-
-        max-width:min(780px,100%);
-
-        margin:0 auto;
+        gap:clamp(44px,6vw,80px);
     }
 
 
@@ -1405,96 +1399,10 @@ section[id]{
 
 
 /* ==========================================
-   MEDALS — SAME SHAPE AS A PERSONAL BEST
-
-   The count was stacked under the emoji over three lines at label size,
-   so a row that carries 100+ medals read as an afterthought beside the
-   personal bests. Emoji and count now share a line at display size with
-   the label beneath, which is the same shape as "24.59 / 50M BUTTERFLY"
-   directly above it, and costs one line less.
+   ACHIEVEMENTS — TIGHTER SPACING
 ========================================== */
 
 @media(min-width:701px){
-
-    #achievements .medal-item{
-
-        display:grid;
-
-        /* Fixed first track, so the count always starts at the same
-           offset instead of wherever the emoji glyph happens to end. */
-
-        grid-template-columns:2.4em auto;
-
-        grid-template-areas:
-            "emoji count"
-            "label label";
-
-        column-gap:10px;
-        row-gap:2px;
-
-        /* centred within its column, and the label centred under the
-           emoji+count pair rather than hugging the left */
-
-        justify-content:center;
-        align-items:center;
-
-        text-align:center;
-    }
-
-
-    #achievements .medal-label{
-        text-align:center;
-    }
-
-
-    /* Fixed box, glyph centred inside it. The three medal emoji do not
-       share metrics -- silver renders at a different height and mass to
-       gold and bronze -- so letting the glyph size its own cell shifted
-       each group by a few pixels. A fixed box makes all three
-       geometrically identical whatever the system font does. */
-
-    #achievements .medal-emoji{
-
-        grid-area:emoji;
-
-        display:inline-flex;
-        align-items:center;
-        justify-content:center;
-
-        width:1.55em;
-        height:1.55em;
-
-        font-size:clamp(1.1rem,1.5vw,1.5rem);
-
-        line-height:1;
-    }
-
-
-    #achievements .achievement-medal-count{
-
-        grid-area:count;
-
-        font-family:"IBM Plex Sans",sans-serif;
-
-        font-size:clamp(1.7rem,2.5vw,2.4rem);
-        font-weight:600;
-
-        line-height:1;
-
-        letter-spacing:-.03em;
-
-        /* Uniform digit widths, so 41 occupies exactly what 25 does. */
-
-        font-variant-numeric:tabular-nums;
-
-        color:#fff;
-    }
-
-
-    #achievements .medal-label{
-        grid-area:label;
-    }
-
 
     /* ---- tighter throughout ---- */
 
@@ -1514,4 +1422,12 @@ section[id]{
         margin-top:2px;
     }
 
+}
+
+
+/* Equal-width digits so the count does not jiggle while it scrambles.
+   Invisible at rest. */
+
+#achievements .achievement-medal-count{
+    font-variant-numeric:tabular-nums;
 }

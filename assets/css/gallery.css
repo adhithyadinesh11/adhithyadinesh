@@ -30,11 +30,11 @@
 
     text-transform:uppercase;
 
-    letter-spacing:.25em;
+    letter-spacing:var(--track-eyebrow);
 
     color:#777;
 
-    font-size:1.2rem;
+    font-size:var(--eyebrow);
 
     margin-bottom:12px;
 
@@ -44,9 +44,13 @@
 
     font-family:"Syne",sans-serif;
 
-    font-size:clamp(1.5rem,4vw,2rem);
+    font-size:var(--h-section);
 
-    line-height:1;
+    font-weight:700;
+
+    line-height:1.06;
+
+    letter-spacing:var(--track-section);
 
     margin:0;
 

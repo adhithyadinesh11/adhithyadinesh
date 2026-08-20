@@ -12,9 +12,12 @@
 
     font-family:var(--syne);
 
-    font-size:clamp(-20rem,5vw,4rem);
+    /* was clamp(-20rem,5vw,4rem) -- a negative minimum */
+    font-size:var(--h-section);
 
-    letter-spacing:-5px;
+    line-height:1.06;
+
+    letter-spacing:var(--track-section);
 
     margin-bottom:-10px;
 

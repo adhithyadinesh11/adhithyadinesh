@@ -120,9 +120,11 @@
 
     font-family:"Syne",sans-serif;
 
-    font-size:clamp(2rem,9vw,3rem);
+    font-size:var(--h-section);
 
-    line-height:.9;
+    letter-spacing:var(--track-section);
+
+    line-height:1.06;
 
     margin:-2px;
 
@@ -141,9 +143,9 @@
 
     font-family:"DM Mono",monospace;
 
-    font-size:.8rem;
+    font-size:var(--eyebrow);
 
-    letter-spacing:.35em;
+    letter-spacing:var(--track-eyebrow);
 
     text-transform:uppercase;
 
@@ -1522,11 +1524,12 @@
 
     font-family:"Syne",sans-serif;
 
-    font-size:clamp(3rem,7vw,5rem);
+    /* Was up to 5rem, larger than any heading on the page itself. */
+    font-size:var(--h-section);
 
-    line-height:.82;
+    line-height:1.06;
 
-    letter-spacing:-.04em;
+    letter-spacing:var(--track-section);
 
     color:#fff;
 
