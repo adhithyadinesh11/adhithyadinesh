@@ -1016,11 +1016,23 @@ Read Article ↗
 
         </div>
 
+        <!-- data-sheet-endpoint: paste the Apps Script /exec URL here to
+             start recording enquiries to the Google Sheet. See
+             tools/contact-sheet.gs for the five-minute setup. Leave it
+             empty and the form simply skips the record. -->
+
         <form
             class="contact-form"
             action="https://api.web3forms.com/submit"
             method="POST"
+            data-sheet-endpoint=""
             >
+
+            <!-- A Web3Forms access key is bound to the email address it
+                 was created with, and cannot be repointed from here. For
+                 enquiries to reach adhithyadinesh11@gmail.com, create a
+                 free key with that address at web3forms.com and replace
+                 the value below. -->
 
             <input
                 type="hidden"
@@ -1075,6 +1087,13 @@ Read Article ↗
             <button type="submit">
                 SEND <span>→</span>
             </button>
+
+            <p class="contact-status" role="status" aria-live="polite"></p>
+
+            <p class="contact-note">
+                Your name, email and message are stored so Adhithya can
+                reply and keep track of who has been in touch.
+            </p>
 
         </form>
 
@@ -1285,6 +1304,7 @@ Read Article ↗
 <script src="assets/js/script.js"></script>
 <script src="assets/js/achievements.js?v=4"></script>
 <script src="assets/js/featured.js"></script>
+<script src="assets/js/contact.js"></script>
 <script src="assets/js/home.js"></script>
 
 </body>

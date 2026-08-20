@@ -849,3 +849,53 @@ section[id]{
     }
 
 }
+
+
+/* ==========================================
+   CONTACT — STATUS + NOTE
+========================================== */
+
+.contact-status{
+
+    margin:4px 0 0;
+
+    min-height:1.2em;
+
+    font-family:"DM Mono",monospace;
+
+    font-size:.72rem;
+
+    letter-spacing:.04em;
+
+    color:rgba(244,241,232,.55);
+}
+
+
+.contact-status.is-busy{
+    color:rgba(244,241,232,.55);
+}
+
+.contact-status.is-ok{
+    color:#8fd6a0;
+}
+
+.contact-status.is-bad{
+    color:#e58b8b;
+}
+
+
+.contact-note{
+
+    /* The form's own 30px gap already separates this. */
+    margin:0;
+
+    max-width:46ch;
+
+    font-family:"DM Mono",monospace;
+
+    font-size:.62rem;
+
+    line-height:1.55;
+
+    color:rgba(244,241,232,.32);
+}
