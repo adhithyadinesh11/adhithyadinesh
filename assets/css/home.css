@@ -389,7 +389,15 @@ section[id]{
 
 .about-stage.is-skipped .about-panel{
 
-    position:static;
+    /* relative, NOT static. The backdrop is absolutely positioned inside
+       this panel; a static panel is not a containing block, so the
+       backdrop resolved against .about-stage instead and the panel's
+       overflow:hidden stopped clipping it. Its box extends ~21px past the
+       section (inset:-15px plus scale(1.05)), so the blurred pool image
+       painted up over the bottom of the hero. relative behaves the same
+       for layout but keeps the clip. */
+
+    position:relative;
 
     /* height:auto, and NO min-height. The full text now lives inside
        this panel, so a min-height would pad blank space under short
