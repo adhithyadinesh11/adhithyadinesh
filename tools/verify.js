@@ -70,8 +70,22 @@ check(
 
 /* 2. Media and article URLs all still reachable somewhere */
 
-expected.videoUrls.forEach(url =>
-    check(haystack.includes(url), "missing video URL: " + url));
+/* Video URLs are assembled in gallery.js as R2 + "race1-web.mp4", so the
+   full URL never appears as a literal string. Check the base and every
+   filename instead -- equivalent in practice, since that concatenation
+   is the only way these are built, and it still catches a dropped video. */
+
+expected.videoUrls.forEach(url => {
+
+    const base = url.slice(0, url.lastIndexOf("/") + 1);
+    const file = url.slice(url.lastIndexOf("/") + 1);
+
+    check(
+        haystack.includes(url) || (haystack.includes(base) && haystack.includes(file)),
+        "missing video: " + file
+    );
+
+});
 
 expected.articleUrls.forEach(url =>
     check(haystack.includes(url), "missing article URL: " + url));
