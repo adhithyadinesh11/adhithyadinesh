@@ -938,3 +938,230 @@ section[id]{
     padding-top:clamp(56px,6vh,72px);
     padding-bottom:clamp(16px,2vh,28px);
 }
+
+
+/* ==========================================
+   ACHIEVEMENTS — PERSONAL BESTS + MEDALS BAND
+
+   Side by side rather than stacked. As two rows they cost roughly 220px
+   of vertical space, which is what pushed the section past one screen on
+   a normal browser window once tabs and a bookmarks bar are accounted
+   for.
+========================================== */
+
+.ach-band{
+
+    display:grid;
+
+    grid-template-columns:minmax(0,1.62fr) minmax(0,1fr);
+
+    gap:clamp(26px,3.4vw,60px);
+
+    align-items:center;
+}
+
+
+.ach-band .pbs,
+.ach-band .medal-summary{
+    margin:0;
+}
+
+
+/* A hairline instead of a full-width divider between them. */
+
+.ach-band .medal-summary{
+
+    /* style.css:595 gives this a border-top and border-bottom, which
+       framed it nicely as a full-width stacked band. Beside the personal
+       bests those two plus the vertical rule below draw three sides of a
+       box, so drop them and keep only the divider. */
+
+    border-top:0;
+    border-bottom:0;
+
+    border-left:1px solid rgba(255,255,255,.10);
+
+    padding-top:0;
+    padding-bottom:0;
+
+    padding-left:clamp(24px,3vw,54px);
+}
+
+
+/* .pb-list uses fixed 220px columns with 70px gaps -- 1090px in total,
+   far wider than this column, so it overflowed off both edges. Flexible
+   tracks with a proportional gap instead. */
+
+.ach-band .pb-list{
+
+    grid-template-columns:repeat(4,minmax(0,1fr));
+
+    gap:clamp(8px,1.4vw,24px);
+}
+
+
+/* style.css gives .pb-time margin:50px 0 1px with transform
+   translateY(-45px), and achievements.css adds margin-bottom:-30px on
+   top. Those three numbers are calibrated against each other: changing
+   the top margin alone slides the event label up into the time and they
+   collide. Neutralise the whole arrangement here rather than re-tuning
+   it, which also reclaims ~45px of dead head-room. */
+
+/* style.css:505 sets min-height:230px on .pb-card, sized for the old
+   full-width stacked layout. Inside the band it left ~110px of empty
+   space under the text, which is what made the section look padded out
+   in the middle. Let the cards size to their content. */
+
+.ach-band .pb-card{
+
+    min-height:0;
+
+    /* Top-aligned, not centred. The meet names wrap to different line
+       counts, so centring each card left the times sitting at different
+       heights across the row. */
+
+    justify-content:flex-start;
+}
+
+
+.ach-band .pb-time{
+
+    margin:0 0 4px;
+
+    transform:none;
+}
+
+.ach-band .pb-time:hover{
+    transform:scale(1.06);
+}
+
+
+/* 80px between three medals is a lot inside half a row. */
+
+.ach-band .medal-tally{
+    gap:clamp(18px,3vw,52px);
+}
+
+
+@media(max-width:900px){
+
+    .ach-band{
+
+        grid-template-columns:1fr;
+
+        gap:20px;
+    }
+
+    .ach-band .medal-summary{
+
+        border-left:0;
+        padding-left:0;
+
+        border-top:1px solid rgba(255,255,255,.10);
+        padding-top:18px;
+    }
+
+}
+
+
+/* ==========================================
+   ACHIEVEMENTS — SHORT AND NARROW SCREENS
+
+   Measured budget at 375x667: the section wanted ~765px. Everything
+   below is gap and type-scale trimming, in the order that costs the
+   content least.
+========================================== */
+
+@media(max-width:700px){
+
+    #achievements .achievements-page{
+        padding-top:40px;
+        padding-bottom:8px;
+    }
+
+    .achievements-hero{
+        margin-bottom:8px;
+    }
+
+    /* At 1.8rem the centred title came within a pixel of the top-left
+       hamburger. A notch smaller keeps clear space between them. */
+
+    .achievements-hero h1{
+        font-size:1.6rem;
+    }
+
+    .ach-band{
+        gap:12px;
+    }
+
+    /* achievements.css:1030 sets margin-bottom:-12px !important on
+       .pb-time for mobile, which was tuned against a translateY this
+       band removes. Left alone it drags the event label up into the
+       time -- all four overlapped. !important is the only way past it. */
+
+    .ach-band .pb-time{
+        margin-bottom:6px !important;
+    }
+
+    .ach-band .medal-summary{
+        padding-top:12px;
+    }
+
+    .quick-summary-trigger{
+        margin:8px 0 0;
+    }
+
+    .divider{
+        margin:8px 0;
+    }
+
+    /* The results block carries four 20px gaps of its own. */
+
+    .results .section-title{
+        margin-bottom:12px;
+    }
+
+    .result-tabs{
+        margin-bottom:12px;
+    }
+
+    .year-selector{
+        margin-bottom:12px;
+    }
+
+}
+
+
+@media(max-width:700px) and (max-height:740px){
+
+    /* iPhone SE and similar. Pull the type in a notch rather than
+       making the reader scroll for the results. */
+
+    .achievements-hero h1{
+        font-size:1.5rem;
+    }
+
+    .ach-band .pb-time{
+        font-size:1.6rem;
+        margin-top:10px;
+    }
+
+    .pb-meet{
+        font-size:.6rem;
+        line-height:1.35;
+    }
+
+    .medal-emoji{
+        font-size:1.15rem;
+    }
+
+    #results-container{
+        max-height:clamp(70px,11vh,100px);
+    }
+
+    #achievements .achievements-page{
+        padding-top:24px;
+        padding-bottom:2px;
+    }
+
+}
