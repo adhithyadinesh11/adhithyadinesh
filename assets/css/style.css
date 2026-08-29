@@ -1,0 +1,1365 @@
+/* ==========================================
+   RESET
+========================================== */
+
+:root{
+    --bg:#000;
+    --text:rgba(255,255,255,.72);
+    --muted:rgba(255,255,255,.45);
+    --line:rgba(255,255,255,.25);
+
+    --syne:"Syne",sans-serif;
+    --manrope:"Manrope",sans-serif;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:var(--manrope);
+    background:var(--bg);
+    color:#fff;
+}
+
+
+/* ==========================================
+   HERO
+========================================== */
+
+.hero{
+    position:relative;
+    width:100%;
+    height:100vh;
+}
+
+.hero img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    object-position:center 8%;
+}
+
+.overlay{
+    position:absolute;
+    inset:0;
+
+    background:rgba(0,0,0,.35);
+
+    animation:imageReveal 1.8s ease forwards;
+
+    pointer-events:none;
+}
+
+.hero-text{
+    position:absolute;
+
+    left:40%;
+    bottom:145px;
+}
+
+.hero-text h1{
+
+    font-family:var(--syne);
+
+    font-size:7.5rem;
+    font-weight:700;
+
+    line-height:.82;
+    letter-spacing:-8px;
+
+    color:var(--text);
+
+    text-transform:uppercase;
+
+    animation:heroFade 2s ease-out;
+
+    cursor:default;
+
+    transition:transform .35s ease;
+
+    transform-origin:left center;
+
+}
+
+.hero-text h1:hover{
+
+    transform:scale(1.03);
+
+}
+
+
+/* ==========================================
+   NAVBAR
+========================================== */
+
+.navbar{
+
+    position:fixed;
+
+    top:28px;
+    left:50%;
+
+    transform:translateX(-50%);
+
+    display:flex;
+    gap:70px;
+
+    z-index:9999;
+
+}
+
+.navbar a{
+
+    position:relative;
+
+    display:inline-block;
+
+    font-family:var(--syne);
+
+    font-size:15px;
+    font-weight:500;
+
+    letter-spacing:.5px;
+
+    color:rgba(255,255,255,.70);
+
+    text-decoration:none;
+
+    transition:
+        color .25s ease,
+        transform .25s ease;
+
+}
+
+/* Homepage only */
+
+.home .navbar a{
+
+    opacity:0;
+
+    transform:translateY(-12px);
+
+    animation:navLinkFade .8s ease forwards;
+
+}
+
+.home .navbar a:nth-child(1){animation-delay:.2s;}
+.home .navbar a:nth-child(2){animation-delay:.3s;}
+.home .navbar a:nth-child(3){animation-delay:.4s;}
+.home .navbar a:nth-child(4){animation-delay:.5s;}
+.home .navbar a:nth-child(5){animation-delay:.6s;}
+
+.navbar a:hover{
+
+    color:#fff;
+
+    transform:translateY(-2px);
+
+}
+
+.navbar a::after{
+
+    content:"";
+
+    position:absolute;
+
+    left:0;
+    bottom:-6px;
+
+    width:0;
+    height:1px;
+
+    background:#fff;
+
+    transition:width .25s ease;
+
+}
+
+.navbar a:hover::after{
+
+    width:100%;
+
+}
+
+
+/* ==========================================
+   GENERIC PAGE HERO
+========================================== */
+
+.page-hero{
+
+    width:100%;
+    height:100vh;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    background:#000;
+
+}
+
+.page-hero h1{
+
+    font-family:var(--syne);
+
+    font-size:8rem;
+    font-weight:700;
+
+    letter-spacing:-6px;
+
+    color:var(--text);
+
+    text-transform:uppercase;
+
+}
+
+
+/* ==========================================
+   ANIMATIONS
+========================================== */
+
+@keyframes heroFade{
+
+    from{
+
+        opacity:.82;
+        transform:translateY(20px);
+
+    }
+
+    to{
+
+        opacity:1;
+        transform:translateY(0);
+
+    }
+
+}
+
+@keyframes imageReveal{
+
+    from{
+
+        background:rgba(0,0,0,.55);
+
+    }
+
+    to{
+
+        background:rgba(0,0,0,.20);
+
+    }
+
+}
+
+@keyframes navLinkFade{
+
+    from{
+
+        opacity:0;
+        transform:translateY(-15px);
+
+    }
+
+    to{
+
+        opacity:1;
+        transform:translateY(0);
+
+    }
+
+}
+
+/* ==========================================
+   PAGE FADE
+========================================== */
+
+.page-fade{
+    opacity:0;
+}
+
+.page-fade.fade-in{
+    animation:pageFade .45s ease forwards;
+}
+
+.page-fade.fade-out{
+    opacity:0;
+    transition:opacity .28s ease;
+}
+
+
+/* ==========================================
+   EXTRA ANIMATIONS
+========================================== */
+
+@keyframes titleReveal {
+    from {
+        opacity: 0;
+        letter-spacing: 20px;
+    }
+
+    to {
+        opacity: 1;
+        letter-spacing: -5px;
+    }
+}
+
+@keyframes sectionReveal{
+
+    from{
+
+        opacity:0;
+        transform:translateX(-30px);
+
+    }
+
+    to{
+
+        opacity:1;
+        transform:translateX(0);
+
+    }
+
+}
+
+@keyframes nameReveal{
+
+    from{
+
+        opacity:0;
+        transform:translateX(30px);
+
+    }
+
+    to{
+
+        opacity:1;
+        transform:translateX(0);
+
+    }
+
+}
+
+
+@media (max-width: 600px) {
+    .achievements-page {
+        padding: 120px 6% 60px;
+    }
+
+    .pb-intro {
+        margin-bottom: 38px;
+    }
+
+    .pb-intro h1 {
+        letter-spacing: -3px;
+    }
+
+    .personal-bests {
+        grid-template-columns: 1fr;
+    }
+
+    .pb-card {
+        min-height: 220px;
+    }
+
+    @media (max-width: 1000px) {
+    .personal-bests {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+}
+
+
+@media (max-width: 520px) {
+    .medal-summary {
+        margin: 60px auto 80px;
+        padding: 34px 0;
+    }
+
+    .medal-tally {
+        gap: 30px;
+    }
+}
+
+@keyframes pageFade{
+
+    from{
+        opacity:0;
+    }
+
+    to{
+        opacity:1;
+    }
+
+}
+
+/* ==========================================
+   MOBILE NAVIGATION
+========================================== */
+
+.menu-toggle{
+
+    display:none;
+
+}
+
+
+/* ==========================================
+   MOBILE
+========================================== */
+
+@media (max-width:700px){
+
+    .navbar{
+
+        position:fixed;
+
+        top:22px;
+
+        left:50%;
+
+        transform:translateX(-50%);
+
+        width:auto;
+
+        z-index:10000;
+
+    }
+
+
+
+/* HAMBURGER */
+
+.menu-toggle{
+
+    display:block;
+
+    width:42px;
+
+    height:42px;
+
+    padding:0;
+
+    border:1px solid rgba(255,255,255,.12);
+
+    border-radius:50%;
+
+    background:rgba(0,0,0,.18);
+
+    backdrop-filter:blur(12px);
+
+    -webkit-backdrop-filter:blur(12px);
+
+    cursor:pointer;
+
+    position:relative;
+
+    z-index:10002;
+
+}
+
+
+.menu-toggle span{
+
+    position:absolute;
+
+    left:50%;
+
+    width:15px;
+
+    height:1px;
+
+    background:#fff;
+
+    transform:translateX(-50%);
+
+    transition:
+        top .35s ease,
+        transform .35s ease,
+        opacity .25s ease;
+
+}
+
+
+/* NORMAL HAMBURGER */
+
+.menu-toggle span:nth-child(1){
+
+    top:calc(50% - 5px);
+
+}
+
+.menu-toggle span:nth-child(2){
+
+    top:50%;
+
+}
+
+.menu-toggle span:nth-child(3){
+
+    top:calc(50% + 5px);
+
+}
+
+
+/* ==========================================
+   HAMBURGER → NORMAL X
+========================================== */
+
+.navbar.mobile-open .menu-toggle span:nth-child(1){
+
+    top:50%;
+
+    transform:translate(-50%,-50%) rotate(45deg);
+
+}
+
+.navbar.mobile-open .menu-toggle span:nth-child(2){
+
+    top:50%;
+
+    opacity:0;
+
+}
+
+.navbar.mobile-open .menu-toggle span:nth-child(3){
+
+    top:50%;
+
+    transform:translate(-50%,-50%) rotate(-45deg);
+
+}
+
+    /* MOBILE MENU */
+
+        .navbar a{
+
+            display:none;
+
+    }
+    
+
+
+    .navbar.mobile-open{
+
+        position:fixed;
+
+        inset:0;
+
+        left:0;
+
+        top:0;
+
+        width:100%;
+
+        height:100dvh;
+
+        transform:none;
+
+        background:rgba(5,5,5,1);
+
+        backdrop-filter:blur(18px);
+
+        -webkit-backdrop-filter:blur(18px);
+
+        display:flex;
+
+        flex-direction:column;
+
+        justify-content:center;
+
+        align-items:center;
+
+        gap:24px;
+
+    }
+
+
+    /* KEEP BUTTON AT TOP */
+
+    .navbar.mobile-open .menu-toggle{
+
+        position:absolute;
+
+        top:22px;
+
+        left:22px;
+
+        right:auto;
+
+    }
+
+
+    /* MENU LINKS */
+
+    .navbar.mobile-open a{
+
+        display:block;
+
+        position:relative;
+
+        font-family:"DM Mono",monospace;
+
+        font-size:.85rem;
+
+        letter-spacing:.25em;
+
+        text-transform:uppercase;
+
+        text-decoration:none;
+
+        color:#777;
+
+        opacity:0;
+
+        transform:translateY(12px);
+
+        animation:mobileMenuLink .45s ease forwards;
+
+    }
+
+
+    .navbar.mobile-open a:nth-of-type(1){
+        animation-delay:.04s;
+    }
+
+    .navbar.mobile-open a:nth-of-type(2){
+        animation-delay:.08s;
+    }
+
+    .navbar.mobile-open a:nth-of-type(3){
+        animation-delay:.12s;
+    }
+
+    .navbar.mobile-open a:nth-of-type(4){
+        animation-delay:.16s;
+    }
+
+    .navbar.mobile-open a:nth-of-type(5){
+        animation-delay:.20s;
+    }
+
+    .navbar.mobile-open a:nth-of-type(6){
+        animation-delay:.24s;
+    }
+
+
+    .navbar.mobile-open a:hover{
+
+        color:#fff;
+
+    }
+
+
+    .navbar.mobile-open a.active{
+
+        color:#fff;
+
+    }
+
+
+    .navbar.mobile-open a::after{
+
+        content:"";
+
+        position:absolute;
+
+        left:0;
+
+        bottom:-7px;
+
+        width:0;
+
+        height:1px;
+
+        background:#fff;
+
+        transition:width .3s ease;
+
+    }
+
+
+    .navbar.mobile-open a:hover::after,
+    .navbar.mobile-open a.active::after{
+
+        width:100%;
+
+    }
+
+
+    /* PREVENT PAGE SCROLL WHILE MENU IS OPEN */
+
+    body.mobile-menu-open{
+
+        overflow:hidden;
+
+    }
+
+}
+
+
+/* ==========================================
+   MOBILE MENU ANIMATION
+========================================== */
+
+@keyframes mobileMenuLink{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(12px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0);
+
+    }
+
+}
+
+/* ==========================================
+   HOMEPAGE — MOBILE
+========================================== */
+
+@media (max-width:700px){
+
+    /* HERO */
+
+    .hero{
+
+        position:relative;
+
+        width:100%;
+
+        height:100dvh;
+
+        min-height:100dvh;
+
+        overflow:hidden;
+
+    }
+
+
+    /* MOBILE IMAGE */
+
+    .hero picture{
+
+        position:absolute;
+
+        inset:0;
+
+        width:100%;
+
+        height:100%;
+
+        display:block;
+
+    }
+
+
+    .hero picture img{
+
+        width:100%;
+
+        height:100%;
+
+        display:block;
+
+        object-fit:cover;
+
+        object-position:center center;
+
+    }
+
+
+    /* OVERLAY */
+
+    .hero .overlay{
+
+        position:absolute;
+
+        inset:0;
+
+        width:100%;
+
+        height:100%;
+
+        pointer-events:none;
+
+    }
+
+
+    /* HERO NAME */
+
+    .hero-text{
+
+        position:absolute;
+
+        left:7vw;
+
+        right:7vw;
+
+        bottom:90px;
+
+        width:auto;
+
+        z-index:5;
+
+    }
+
+
+    .hero-name{
+
+        font-family:var(--syne);
+
+        font-size:clamp(2.4rem,11.5vw,4rem);
+
+        font-weight:700;
+
+        line-height:.88;
+
+        letter-spacing:-.045em;
+
+        margin:0;
+
+        white-space:nowrap;
+
+        max-width:100%;
+
+    }
+
+}
+
+/* ==========================================
+   SKIP CONTROLS
+========================================== */
+
+.mobile-skip{
+
+    display:none;
+
+    background:none;
+    border:none;
+    outline:none;
+
+    padding:0;
+    margin:0;
+
+    font-family:"DM Mono",monospace;
+    color:rgba(255,255,255,.28);
+
+    cursor:pointer;
+}
+
+/* ==========================================
+   HOMEPAGE — FINAL MOBILE FIX
+========================================== */
+
+@media (max-width:700px){
+
+    /* ==========================================
+       HOMEPAGE HAMBURGER — TOP LEFT
+    ========================================== */
+
+    .navbar:not(.mobile-open){
+
+        position:fixed !important;
+
+        top:22px !important;
+
+        left:22px !important;
+
+        right:auto !important;
+
+        width:42px !important;
+
+        height:42px !important;
+
+        margin:0 !important;
+
+        padding:0 !important;
+
+        transform:none !important;
+
+        z-index:10000 !important;
+
+    }
+
+
+    .navbar:not(.mobile-open) .menu-toggle{
+
+        position:absolute !important;
+
+        top:0 !important;
+
+        left:0 !important;
+
+        transform:none !important;
+
+        margin:0 !important;
+
+    }
+
+
+    /* ==========================================
+       HERO
+    ========================================== */
+
+    .hero{
+
+        width:100% !important;
+
+        height:100dvh !important;
+
+        min-height:100dvh !important;
+
+        overflow:hidden !important;
+
+        position:relative !important;
+
+    }
+
+
+    /* ==========================================
+       MOBILE IMAGE
+    ========================================== */
+
+    .hero picture{
+
+        position:absolute !important;
+
+        inset:0 !important;
+
+        width:100% !important;
+
+        height:100% !important;
+
+        display:block !important;
+
+    }
+
+
+    .hero picture img{
+
+        width:100% !important;
+
+        height:100% !important;
+
+        display:block !important;
+
+        object-fit:cover !important;
+
+        object-position:center center !important;
+
+    }
+
+
+    /* ==========================================
+       HERO TITLE
+    ========================================== */
+
+    .hero-text{
+
+        position:absolute !important;
+
+        left:35vw !important;
+
+        right:7vw !important;
+
+        bottom:200px !important;
+
+        width:auto !important;
+
+        z-index:5 !important;
+
+        margin:0 !important;
+
+        padding:0 !important;
+
+    }
+
+
+    .hero-text h1,
+    .hero-name{
+
+        font-family:var(--syne) !important;
+
+        font-size:clamp(2.4rem,11.5vw,4rem) !important;
+
+        font-weight:700 !important;
+
+        line-height:.88 !important;
+
+        letter-spacing:-.045em !important;
+
+        margin:0 !important;
+
+        padding:0 !important;
+
+        white-space:nowrap !important;
+
+        width:max-content !important;
+
+        max-width:100% !important;
+
+    }
+
+}
+
+
+/* ==========================================
+   FEATURED — MOBILE
+========================================== */
+
+@media (max-width:700px){
+
+    /* ==========================================
+       PAGE
+    ========================================== */
+
+    body.featured-page{
+
+        height:auto !important;
+
+        min-height:100dvh !important;
+
+        overflow-x:hidden !important;
+
+        overflow-y:auto !important;
+
+    }
+
+
+    .featured-page{
+
+        height:auto !important;
+
+        min-height:100dvh !important;
+
+        display:block !important;
+
+    }
+
+
+    /* ==========================================
+       NAVBAR — TOP LEFT
+    ========================================== */
+
+    .featured-page .navbar:not(.mobile-open){
+
+        position:fixed !important;
+
+        top:22px !important;
+
+        left:22px !important;
+
+        right:auto !important;
+
+        width:42px !important;
+
+        height:42px !important;
+
+        margin:0 !important;
+
+        padding:0 !important;
+
+        transform:none !important;
+
+        z-index:10000 !important;
+
+    }
+
+
+    .featured-page .navbar:not(.mobile-open) .menu-toggle{
+
+        position:absolute !important;
+
+        top:0 !important;
+
+        left:0 !important;
+
+        transform:none !important;
+
+        margin:0 !important;
+
+    }
+
+
+    /* ==========================================
+       TITLE — NEXT TO HAMBURGER
+    ========================================== */
+
+    .featured-hero{
+
+        width:100% !important;
+
+        height:auto !important;
+
+        padding:27px 22px 0 82px !important;
+
+        box-sizing:border-box !important;
+
+        text-align:left !important;
+
+    }
+
+
+    .featured-hero h1{
+
+        margin:0 !important;
+
+        padding:0 !important;
+
+        font-family:var(--syne) !important;
+
+        font-size:1.55rem !important;
+
+        line-height:32px !important;
+
+        letter-spacing:-.025em !important;
+
+        white-space:nowrap !important;
+
+    }
+
+
+    /* Hide desktop explanatory paragraph */
+
+    .featured-hero p{
+
+        display:none !important;
+
+    }
+
+
+    /* ==========================================
+       SINGLE VERTICAL SCROLL
+    ========================================== */
+
+    .featured-track{
+
+        width:100% !important;
+
+        height:auto !important;
+
+        min-height:0 !important;
+
+        display:block !important;
+
+        overflow:visible !important;
+
+        padding:55px 18px 30px !important;
+
+        box-sizing:border-box !important;
+
+    }
+
+
+    .featured-wrapper{
+
+        width:100% !important;
+
+        display:flex !important;
+
+        flex-direction:column !important;
+
+        gap:45px !important;
+
+        padding:0 !important;
+
+        transform:none !important;
+
+    }
+
+
+    /* ==========================================
+       ARTICLE CARD
+    ========================================== */
+
+    .article-card{
+
+        width:100% !important;
+
+        max-width:520px !important;
+
+        margin:0 auto !important;
+
+        flex-shrink:0 !important;
+
+    }
+
+
+    /* ==========================================
+       IMAGE
+    ========================================== */
+
+    .article-image{
+
+        width:100% !important;
+
+        height:210px !important;
+
+        overflow:hidden !important;
+
+    }
+
+
+    .article-image img{
+
+        width:100% !important;
+
+        height:100% !important;
+
+        object-fit:cover !important;
+
+    }
+
+
+    /* ==========================================
+       ARTICLE CONTENT
+    ========================================== */
+
+    .article-content{
+
+        height:auto !important;
+
+        min-height:0 !important;
+
+        padding:18px 4px 0 !important;
+
+        display:flex !important;
+
+        flex-direction:column !important;
+
+    }
+
+
+    .publication{
+
+        font-size:.58rem !important;
+
+        letter-spacing:.16em !important;
+
+        opacity:.6;
+
+    }
+
+
+    .article-content h2{
+
+        font-size:1.25rem !important;
+
+        line-height:1.15 !important;
+
+        margin:8px 0 10px !important;
+
+    }
+
+
+    .article-content p{
+
+        max-width:100% !important;
+
+        font-size:.7rem !important;
+
+        line-height:1.5 !important;
+
+        margin-bottom:12px !important;
+
+    }
+
+
+    .read-link{
+
+        font-size:.62rem !important;
+
+        letter-spacing:.12em !important;
+
+    }
+
+
+    /* ==========================================
+       DOT PAGINATION
+    ========================================== */
+
+    .featured-dots{
+
+        display:flex !important;
+
+        justify-content:center !important;
+
+        align-items:center !important;
+
+        gap:8px !important;
+
+        width:100% !important;
+
+        padding:8px 0 35px !important;
+
+    }
+
+
+    .featured-dot{
+
+        width:5px !important;
+
+        height:5px !important;
+
+        padding:0 !important;
+
+        margin:0 !important;
+
+        border:0 !important;
+
+        border-radius:50% !important;
+
+        background:rgba(255,255,255,.25) !important;
+
+        cursor:pointer !important;
+
+        transition:
+
+            transform .25s ease,
+
+            background .25s ease,
+
+            opacity .25s ease;
+
+    }
+
+
+    .featured-dot.active{
+
+        background:#fff !important;
+
+        transform:scale(1.35) !important;
+
+    }
+
+}
+
+/* ==========================================
+   HOMEPAGE — MOBILE BRIGHTNESS
+========================================== */
+
+@media (max-width:700px){
+
+    .hero .overlay{
+        background:rgba(0,0,0,0) !important;
+        animation:none !important;
+    }
+
+}
