@@ -26,6 +26,12 @@ const gallery = [
     },
 
     {
+        image: "18.jpg",
+        title: "",
+        subtitle: ""
+    },
+
+    {
         image: "14.jpg",
         title: "",
         subtitle: ""
@@ -33,6 +39,12 @@ const gallery = [
 
     {
         image: "13.jpg",
+        title: "",
+        subtitle: ""
+    },
+
+    {
+        image: "19.jpg",
         title: "",
         subtitle: ""
     },
@@ -57,6 +69,12 @@ const gallery = [
 
     {
         image: "9.jpg",
+        title: "",
+        subtitle: ""
+    },
+
+    {
+        image: "20.jpg",
         title: "",
         subtitle: ""
     },
